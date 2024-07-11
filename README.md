@@ -16,8 +16,8 @@ In just six years, Nubank became the sixth-largest bank in Brazil, ranking among
 ## Project Structure
 
 - **data**: Contains the dataset used for analysis.
-  *** Financial information is available on the bank's website for its investors. ***
-  *** The information contained in the dataset is fictitious and/or encrypted. ***
+       - Financial information is available on the bank's website for its investors.
+       - The information contained in the dataset is fictitious and/or encrypted.
 - **model**: Includes the machine learning model and scripts for training and evaluation.
 - **streamlit_app**: Houses the Streamlit application for interactive analysis.
 - **notebooks**: Jupyter notebooks for exploratory data analysis and model development.
