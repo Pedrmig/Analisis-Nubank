@@ -5,7 +5,7 @@
 This project involves the creation of a machine learning model based on a sample dataset from Nubank's data analysis. 
 A predictive model has been developed and, using Streamlit, an organized analysis of some results from Nubank and the database analysis are presented.
 
-Feel free to explore more at [Streamlit](https://streamlit.io).
+Feel free to explore more at [Streamlit](https://nubank.streamlit.app/).
 
 ## About Nubank
 
