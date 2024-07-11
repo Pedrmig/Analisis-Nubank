@@ -22,17 +22,3 @@ In just six years, Nubank became the sixth-largest bank in Brazil, ranking among
 - **streamlit_app**: Houses the Streamlit application for interactive analysis.
 - **notebooks**: Jupyter notebooks for exploratory data analysis and model development.
 
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.7+
-- Required libraries listed in `requirements.txt`
-
-### Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/nubank-ml-analysis.git
-   cd nubank-ml-analysis
