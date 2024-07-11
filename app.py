@@ -158,7 +158,7 @@ if selected == "Dataset":
         
         col1, col2 = st.columns([1,1])
         with col1:
-            st.image('Images_dataset/nulos.png', use_column_width=True)
+            st.image('images_dataset/nulos.png', use_column_width=True)
         with col2:
             st.image('images_dataset/nulos_arreglados.png', use_column_width=True)
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
@@ -271,7 +271,7 @@ if selected == "Dataset":
         </div>    
         """, unsafe_allow_html=True)
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)    
-        st.image('Images_dataset/variables.png', use_column_width=True)
+        st.image('images_dataset/variables.png', use_column_width=True)
         
     #if tabs == "Visualizaciones":
         
@@ -283,7 +283,7 @@ if selected == "Dataset":
             </div>    
             """, unsafe_allow_html=True)
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-        st.image('Images_dataset/models.png', use_column_width=True)
+        st.image('images_dataset/models.png', use_column_width=True)
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
         
         st.markdown("""
@@ -303,11 +303,11 @@ if selected == "Dataset":
             </div>    
             """, unsafe_allow_html=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('Images_dataset/n_antes.png', use_column_width=True)
+            st.image('images_dataset/n_antes.png', use_column_width=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('Images_dataset/matriz_confusion.png', use_column_width=True)
+            st.image('images_dataset/matriz_confusion.png', use_column_width=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('Images_dataset/variable_target.png', use_column_width=True)
+            st.image('images_dataset/variable_target.png', use_column_width=True)
         
         with col2:
             st.markdown("""
@@ -316,11 +316,11 @@ if selected == "Dataset":
             </div>    
             """, unsafe_allow_html=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('Images_dataset/n_depois.png', use_column_width=True)
+            st.image('images_dataset/n_depois.png', use_column_width=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('Images_dataset/matriz_confusion_arreglado.png', use_column_width=True)
+            st.image('images_dataset/matriz_confusion_arreglado.png', use_column_width=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('Images_dataset/variable_target_arreglado.png', use_column_width=True)
+            st.image('images_dataset/variable_target_arreglado.png', use_column_width=True)
 
     if tabs == "Visualizaciones":
         
