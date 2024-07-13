@@ -50,10 +50,10 @@ if selected == "Home":
 
     
     #creditos de las imagenes
-    st.markdown("<p class='images-text'>imagenes: Fuente de las Imágenes:</p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>imagenes: * https://tecnograna.com.br/reviews/review-cartao-nubank/attachment/nubank-2/</p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>imagenes: * https://noticiasconcursos.com.br/nubank-possibilita-emprestimo-rapido-simplificado/ </p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>imagenes: * https://nu.com.br</p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>Fuente de las Imágenes:</p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>- https://tecnograna.com.br/reviews/review-cartao-nubank/attachment/nubank-2/</p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>- https://noticiasconcursos.com.br/nubank-possibilita-emprestimo-rapido-simplificado/ </p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>- https://nu.com.br</p>", unsafe_allow_html=True)
     
 
 # PAGE 2-------------------------------------
