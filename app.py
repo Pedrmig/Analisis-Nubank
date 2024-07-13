@@ -594,19 +594,32 @@ if selected == "Análisis de Crédito":
         """
         st.markdown(html_content, unsafe_allow_html=True)
 
-    with col2:    
-        st.write(f"Score 6: {score_6}")
-        st.write(f"External Data Provider Credit Checks Last 2 Years: {external_data_provider_credit_checks_last_2_year}")
-        st.write(f"External Data Provider Credit Checks Last Month: {external_data_provider_credit_checks_last_month}")
-        st.write(f"External Data Provider Fraud Score: {external_data_provider_fraud_score}")
-        st.write(f"External Data Provider Credit Checks Last Year: {external_data_provider_credit_checks_last_year}")
+    with col2:
+        html_content = f"""
+        <div class="container">
+            <p class='analisis-credito'> Score 6: {score_6} </p>
+            <p class='analisis-credito'> External Data Provider Credit Checks Last 2 Years: {external_data_provider_credit_checks_last_2_year} </p>
+            <p class='analisis-credito'> External Data Provider Credit Checks Last Month: {external_data_provider_credit_checks_last_month} </p>
+            <p class='analisis-credito'> External Data Provider Fraud Score: {external_data_provider_fraud_score} </p>
+            <p class='analisis-credito'> External Data Provider Credit Checks Last Year: {external_data_provider_credit_checks_last_year} </p>
+        
+        </div>    
+        """
+        st.markdown(html_content, unsafe_allow_html=True)
+       
     with col3:
-        st.write(f"Job Name: {job_name}")
-        st.write(f"Target Fraud: {target_fraud}")
-        st.write(f"Risk Rate: {risk_rate}")
-        st.write(f"Real State: {real_state}")
-        st.write(f"N Defaulted Loans: {n_defaulted_loans}")
-
+        html_content = f"""
+        <div class="container">
+            <p class='analisis-credito'> Job Name: {job_name} </p>
+            <p class='analisis-credito'> Target Fraud: {target_fraud} </p>
+            <p class='analisis-credito'> Risk Rate: {risk_rate} </p>
+            <p class='analisis-credito'> Real State: {real_state} </p>
+            <p class='analisis-credito'> N Defaulted Loans: {n_defaulted_loans} </p>
+        
+        </div>    
+        """
+        st.markdown(html_content, unsafe_allow_html=True)
+        
     # Preparar los datos de entrada
     input_data = [score_1, score_2, score_3, score_4, score_5, score_6,
                     risk_rate, last_amount_borrowed, last_borrowed_in_months,
@@ -626,7 +639,6 @@ if selected == "Análisis de Crédito":
 # Adicionar CSS al app Streamlit
 css = """
 <style>
-    
     [data-testid="stSidebar"] {
         background-color: #727683;
         padding: 0;
@@ -748,9 +760,11 @@ css = """
     }
     .analisis-credito {
         text-align: left;
-        font-size: 1.2em;
+        font-size: 0.8em;
         margin-bottom: 10px;
-        color: @727683;
+        color: #727683;
+        font-family: 'DmSans', sans-serif;
+        font-weight: bold;
     }    
     .responsive-iframe-container {
         position: relative;
@@ -766,8 +780,7 @@ css = """
         height: 100%;
         border: 0;
     }
-    
-</style>
+    </style>
 """
 st.markdown(css, unsafe_allow_html=True)
 
