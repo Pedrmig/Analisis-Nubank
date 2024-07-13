@@ -50,10 +50,10 @@ if selected == "Home":
 
     
     #creditos de las imagenes
-    st.markdown("<p class='images-text'>Fuente de las Imágenes:</p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>- https://tecnograna.com.br/reviews/review-cartao-nubank/attachment/nubank-2/</p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>- https://noticiasconcursos.com.br/nubank-possibilita-emprestimo-rapido-simplificado/ </p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>- https://nu.com.br</p>", unsafe_allow_html=True)
+    st.markdown("<p class='sub-figure2'>Fuente de las Imágenes:</p>", unsafe_allow_html=True)
+    st.markdown("<p class='sub-figure2'>- https://tecnograna.com.br/reviews/review-cartao-nubank/attachment/nubank-2/</p>", unsafe_allow_html=True)
+    st.markdown("<p class='sub-figure2'>- https://noticiasconcursos.com.br/nubank-possibilita-emprestimo-rapido-simplificado/ </p>", unsafe_allow_html=True)
+    st.markdown("<p class='sub-figure2'>- https://nu.com.br</p>", unsafe_allow_html=True)
     
 
 # PAGE 2-------------------------------------
@@ -734,8 +734,9 @@ css = """
     }
     .sub-figure2 {
         text-align: left;
-        font-size: 20px;
-        margin-bottom: 10px; 
+        font-size: 10px;
+        margin-bottom: 5px;
+        color: #727683; 
     }
     
     .responsive-iframe-container {
