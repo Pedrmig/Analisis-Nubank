@@ -582,7 +582,7 @@ if selected == "Análisis de Crédito":
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
-        st.markdown("""
+        html_content = f"""
         <div class="container">
             <p class='analisis-credito'> Score 1: {score_1} </p>
             <p class='analisis-credito'> Score 2: {score_2} </p>
@@ -591,7 +591,8 @@ if selected == "Análisis de Crédito":
             <p class='analisis-credito'> Score 5: {score_5} </p>
         
         </div>    
-    """, unsafe_allow_html=True)
+        """
+        st.markdown(html_content, unsafe_allow_html=True)
 
     with col2:    
         st.write(f"Score 6: {score_6}")
