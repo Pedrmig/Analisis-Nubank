@@ -584,11 +584,11 @@ if selected == "Análisis de Crédito":
     with col1:
         st.markdown("""
         <div class="container">
-            <p class='analisis-credito'> f"Score 1: {score_1}" </p>
-            <p class='analisis-credito'> f"Score 2: {score_2}" </p>
-            <p class='analisis-credito'> f"Score 3: {score_3}" </p>
-            <p class='analisis-credito'> f"Score 4: {score_4}" </p>
-            <p class='analisis-credito'> f"Score 5: {score_5}" </p>
+            <p class='analisis-credito'> Score 1: {score_1} </p>
+            <p class='analisis-credito'> Score 2: {score_2} </p>
+            <p class='analisis-credito'> Score 3: {score_3} </p>
+            <p class='analisis-credito'> Score 4: {score_4} </p>
+            <p class='analisis-credito'> Score 5: {score_5} </p>
         
         </div>    
     """, unsafe_allow_html=True)
