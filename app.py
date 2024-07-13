@@ -751,7 +751,7 @@ css = """
         font-size: 1.2em;
         margin-bottom: 10px;
         color: @727683;
-        
+    }    
     .responsive-iframe-container {
         position: relative;
         width: 100%;
