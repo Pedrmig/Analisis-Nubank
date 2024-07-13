@@ -730,7 +730,8 @@ css = """
     .sub-figure {
         text-align: left;
         font-size: 13px;
-        margin-bottom: 45px; 
+        margin-bottom: 45px;
+        color: #727683; 
     }
     .sub-figure2 {
         text-align: left;
