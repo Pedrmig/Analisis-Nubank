@@ -582,11 +582,17 @@ if selected == "Análisis de Crédito":
     col1, col2, col3 = st.columns([1, 2, 1])
     
     with col1:
-        st.write(f"Score 1: {score_1}")
-        st.write(f"Score 2: {score_2}")
-        st.write(f"Score 3: {score_3}")
-        st.write(f"Score 4: {score_4}")
-        st.write(f"Score 5: {score_5}")
+        st.markdown("""
+        <div class="container">
+            <p class='analisis-credito'> f"Score 1: {score_1}" </p>
+            <p class='analisis-credito'> f"Score 2: {score_2}" </p>
+            <p class='analisis-credito'> f"Score 3: {score_3}" </p>
+            <p class='analisis-credito'> f"Score 4: {score_4}" </p>
+            <p class='analisis-credito'> f"Score 5: {score_5}" </p>
+        
+        </div>    
+    """, unsafe_allow_html=True)
+
     with col2:    
         st.write(f"Score 6: {score_6}")
         st.write(f"External Data Provider Credit Checks Last 2 Years: {external_data_provider_credit_checks_last_2_year}")
@@ -739,7 +745,12 @@ css = """
         margin-bottom: 5px;
         color: #727683; 
     }
-    
+    .analisis-credito {
+        text-align: left;
+        font-size: 1.2em;
+        margin-bottom: 10px;
+        color: @727683;
+        
     .responsive-iframe-container {
         position: relative;
         width: 100%;
