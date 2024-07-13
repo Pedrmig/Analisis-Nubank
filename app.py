@@ -50,9 +50,10 @@ if selected == "Home":
 
     
     #creditos de las imagenes
-    st.markdown("<p class='images-text'>imagenes: https://tecnograna.com.br/reviews/review-cartao-nubank/attachment/nubank-2/</p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>imagenes: https://noticiasconcursos.com.br/nubank-possibilita-emprestimo-rapido-simplificado/ </p>", unsafe_allow_html=True)
-    st.markdown("<p class='images-text'>imagenes: https://nu.com.br</p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>imagenes: Fuente de las Imágenes:</p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>imagenes: * https://tecnograna.com.br/reviews/review-cartao-nubank/attachment/nubank-2/</p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>imagenes: * https://noticiasconcursos.com.br/nubank-possibilita-emprestimo-rapido-simplificado/ </p>", unsafe_allow_html=True)
+    st.markdown("<p class='images-text'>imagenes: * https://nu.com.br</p>", unsafe_allow_html=True)
     
 
 # PAGE 2-------------------------------------
@@ -471,9 +472,9 @@ if selected == "Análisis de Crédito":
     st.markdown("""
     <div class="container">
         <h1 class='centered-title-pg1'>Análisis de Crédito</h1>
-        <p class='centered-text-pg5'> Aqui se puede ver el funcionamiento de la Anállisis de Crédito</p>
-        <p class='centered-text-pg5'> Pero como algunas informaciones estan encriptadas por el banco, las vamos rellenar al azar.</p>
-        <p class='centered-text-pg5'> Algunas de esas informaciones son de organos y bases externas que los bancos cuentam para hacer sus análisis.</p>
+        <p class='centered-text-pg5'> Aquí se puede ver el funcionamiento de la Análisis de Crédito</p>
+        <p class='centered-text-pg5'> Pero como algunas informaciones estan encriptadas por el banco, las vamos a rellenar al azar.</p>
+        <p class='centered-text-pg5'> Algunas de esas informaciones son de órganos y bases externas que los bancos cuentan para hacer sus análisis.</p>
         .
     </div>    
     """, unsafe_allow_html=True) 
@@ -537,7 +538,7 @@ if selected == "Análisis de Crédito":
     
     # somente number imputs
     with col2:
-        last_amount_borrowed = st.number_input("Ultimo valor tomado de prestamo", min_value=0)
+        last_amount_borrowed = st.number_input("Último valor tomado de prestamo", min_value=0)
         last_borrowed_in_months = st.number_input("Número de meses del ultimo prestamo", min_value=0)
         credit_limit = st.number_input("Límite de Credito", min_value=0)
     with col3:
@@ -611,7 +612,7 @@ if selected == "Análisis de Crédito":
                     reported_income, target_fraud]
 
     # Analisis de Credito
-    if st.button("Analisis de Credito"):
+    if st.button("Análisis de Credito"):
         predicted = predict_price(model, input_data)
         st.write(f"El previsto en el análisis es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}")
 
