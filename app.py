@@ -199,14 +199,14 @@ if selected == "Dataset":
         
         st.markdown("""
         <div class="container">
-        <p class='up-figure-text'>Después de decidir las columnas que serían utilizadas para el análisis, comenzamos examinando los valores nulos. A continuación, se puede ver el antes y después de limpiarlos.</p>
+        <p class='up-figure-text'>Después de decidir las columnas que serían utilizadas para el análisis, comenzamos examinando los valores nulos.</p>
         <p class='up-figure-text'>Las columnas con variables categóricas relacionadas con el registro del cliente fueron reemplazadas por "sin información". Las líneas de registro numéricas fueron reemplazadas por cero, y algunas filas que estaban casi totalmente vacías fueron eliminadas.</p>
         </div>    
         """, unsafe_allow_html=True)
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
         
-        st.image('images_dataset/nulos.png', use_column_width=True)
-        
+        st.image('images_dataset/nulos.png', width=450)
+
         st.markdown("""
         <div class="container">
         <p class='up-figure-text'>La tabla a continuación presenta un análisis estadístico de los datos después de la limpieza.</p>
