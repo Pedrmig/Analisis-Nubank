@@ -1026,13 +1026,13 @@ css = """
         text-align: left;
         font-size: 13px;
         margin-bottom: 5px;
-        color: #727999; 
+        color: black; 
     }
     .sub-figure3 {
         text-align: left;
         font-size: 16px;
         margin-bottom: 5px;
-        color: #727999; 
+        color: black; 
     }
     .analisis-credito {
         text-align: left;
