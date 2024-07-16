@@ -906,7 +906,7 @@ if selected == "Predicción Acciones":
         next_pred_scaled = scaler.transform(next_pred.reshape(-1, 1))
         X_input = np.append(X_input[:, 1:, :], next_pred_scaled.reshape(1, 1, 1), axis=1)
 
-    predictions = (scaler.inverse_transform(np.array(predictions).reshape(-1, 1)))*10
+    predictions = scaler.inverse_transform(np.array(predictions).reshape(-1, 1))
 
     st.markdown("""
             <div class="container">
@@ -915,10 +915,10 @@ if selected == "Predicción Acciones":
             """, unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 2, 1])
-    with col1:
+    with col2:
         for i, pred in enumerate(predictions, 1):
             st.markdown(f"""
-            <div class="container" style="border: 6px solid #8a05be; padding: 10px; margin-bottom: 10px;border-radius: 15px;">
+            <div class="container" style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 10px;">
                 <p class='left-text-pg1'> Día {i}: US$ {pred[0]:.2f} </p> 
             </div>  
             """, unsafe_allow_html=True)
