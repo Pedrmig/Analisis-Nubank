@@ -1024,15 +1024,15 @@ css = """
     }
     .sub-figure2 {
         text-align: left;
-        font-size: 15px;
+        font-size: 13px;
         margin-bottom: 5px;
-        color: black; 
+        color: #727999; 
     }
     .sub-figure3 {
         text-align: left;
-        font-size: 15px;
+        font-size: 16px;
         margin-bottom: 5px;
-        color: #727683; 
+        color: #727999; 
     }
     .analisis-credito {
         text-align: left;
