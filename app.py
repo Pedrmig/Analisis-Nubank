@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 from streamlit_option_menu import option_menu
 from plotly.offline import  init_notebook_mode
 import cufflinks
@@ -7,8 +8,16 @@ cufflinks.go_offline(connected=True)
 init_notebook_mode(connected=True)
 import streamlit.components.v1 as components
 import random
-
+import yfinance as yf
+import plotly.graph_objs as go
 import joblib
+from datetime import datetime, date, timedelta
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, LSTM, Input
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler
+
 model = joblib.load('modelo_GBC.pkl')
 
 # ---------------------SITE CONFIG----------------------#
@@ -21,8 +30,8 @@ with st.sidebar:
     st.image("Images/Nubanksinfundo.png", use_column_width=True)
     selected = option_menu(
         menu_title = "Main Menu",
-        options = ["Home","Empresa","Dataset","Indagaciones", 'Análisis de Crédito'],
-        icons = ["house","book",'coin','table',"bar-chart","calculator"],
+        options = ["Home","Empresa","Dataset","Indagaciones", 'Análisis de Crédito','Predicción Acciones'],
+        icons = ["house","book",'coin','table',"bar-chart","calculator","chart-line"],
         menu_icon = "cast",
         styles={
             "container": {"padding": "0", "background-color": "#787683", "border-radius": "0px"},
@@ -735,11 +744,156 @@ if selected == "Análisis de Crédito":
                     external_data_provider_credit_checks_last_year,
                     external_data_provider_fraud_score, marketing_channel,
                     reported_income, target_fraud]
+    
+    input_data_azure = [score_1, score_2, score_3, score_4, score_5, score_6,
+                    risk_rate, last_amount_borrowed, last_borrowed_in_months,
+                    credit_limit, income, job_name,
+                    n_bankruptcies, n_defaulted_loans, n_accounts, n_issues,
+                    external_data_provider_credit_checks_last_2_year,
+                    external_data_provider_credit_checks_last_month,
+                    external_data_provider_credit_checks_last_year,
+                    external_data_provider_fraud_score, marketing_channel,
+                    reported_income, target_fraud]
 
     # Analisis de Credito
     if st.button("Análisis de Credito"):
         predicted = predict_price(model, input_data)
         st.write(f"El previsto en el análisis es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}")
+
+
+# Verificar si la opción "Predicción Acciones" fue seleccionada
+if selected == "Predicción Acciones":
+    
+    st.markdown("""
+    <div class="container">
+    <h1 class='centered-title-pg1'>Predicción de Precio de Acciones</h1>
+    <p class='centered-text-pg5'>Aquí se puede ver un predictor basado en series temporales en funcionamiento.</p>
+    <p class='centered-text-pg5'>Recopilamos todos los valores de las acciones desde enero de 2022 hasta ahora, entrenamos un modelo y realizamos algunas predicciones de prueba basadas en los datos que teníamos.</p>
+    </div>
+    """, unsafe_allow_html=True) 
+    st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+
+    
+    ticker = 'NU'
+    end_date = date.today()
+    start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
+
+    nu_data = yf.download(ticker, start=start_date, end=end_date)
+    nu_data = nu_data.reset_index()
+    nu_data = nu_data[['Date', 'Close']]
+    nu_data = nu_data.dropna()
+
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    nu_data['Close'] = scaler.fit_transform(nu_data[['Close']])
+
+    train_size = int(len(nu_data) * 0.8)
+    train_data, test_data = nu_data[:train_size], nu_data[train_size:]
+
+    def create_dataset(data, time_step=1):
+        X, y = [], []
+        for i in range(len(data) - time_step - 1):
+            a = data[i:(i + time_step), 0]
+            X.append(a)
+            y.append(data[i + time_step, 0])
+        return np.array(X), np.array(y)
+
+    time_step = 60
+    train_data_np = train_data['Close'].values.reshape(-1, 1)
+    test_data_np = test_data['Close'].values.reshape(-1, 1)
+
+    X_train, y_train = create_dataset(train_data_np, time_step)
+    X_test, y_test = create_dataset(test_data_np, time_step)
+
+    X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
+    X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
+
+    model = Sequential()
+    model.add(Input(shape=(time_step, 1)))
+    model.add(LSTM(50, return_sequences=True))
+    model.add(LSTM(50, return_sequences=False))
+    model.add(Dense(25))
+    model.add(Dense(1))
+
+    model.compile(optimizer='adam', loss='mean_squared_error')
+    model.fit(X_train, y_train, batch_size=1, epochs=1)
+
+    train_predict = model.predict(X_train)
+    test_predict = model.predict(X_test)
+
+    train_predict = scaler.inverse_transform(train_predict)
+    test_predict = scaler.inverse_transform(test_predict)
+    y_train = scaler.inverse_transform([y_train])
+    y_test = scaler.inverse_transform([y_test]) 
+
+    # Gráfico interactivo con Plotly
+    fig = go.Figure()
+
+    # Agregar serie de datos reales
+    fig.add_trace(go.Scatter(x=nu_data['Date'], y=scaler.inverse_transform(nu_data[['Close']]).reshape(-1), 
+                             mode='lines', name='Valor Real'))
+
+    # Agregar predicciones de entrenamiento
+    train_predict_plot = np.empty_like(nu_data['Close'])
+    train_predict_plot[:] = np.nan
+    train_predict_plot[time_step:len(train_predict) + time_step] = train_predict.reshape(-1)
+
+    fig.add_trace(go.Scatter(x=nu_data['Date'], y=train_predict_plot, mode='lines', name='Predicción de Entrenamiento'))
+
+    # Agregar predicciones de prueba
+    test_predict_plot = np.empty_like(nu_data['Close'])
+    test_predict_plot[:] = np.nan
+    test_predict_plot[len(train_predict) + (time_step*2) + 1:len(nu_data) - 1] = test_predict.reshape(-1)
+
+    fig.add_trace(go.Scatter(x=nu_data['Date'], y=test_predict_plot, mode='lines', name='Predicción de Prueba'))
+
+    fig.update_layout(title='Predicción de Acciones',
+                      xaxis_title='Fecha',
+                      yaxis_title='Precio de Cierre',
+                      legend=dict(x=0, y=1, traceorder='normal'))
+
+    st.plotly_chart(fig)
+
+    st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+    st.markdown("""
+    <div class="container">
+        <p class='centered-text-pg5'>Basándonos en esa información, hacemos una predicción de cuánto estarán las acciones de Nubank en los próximos 3 días.</p>
+        <p class='centered-text-pg5'>Los valores se actualizan diariamente, y siempre se consideran los 3 próximos días laborables.</p>
+    </div>  
+    """, unsafe_allow_html=True)
+    st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+
+    
+    last_60_days = nu_data['Close'][-60:].values
+    last_60_days_scaled = scaler.transform(last_60_days.reshape(-1, 1))
+
+    X_input = last_60_days_scaled.reshape(1, -1, 1)
+
+    predictions = []
+    for _ in range(3):
+        next_pred = model.predict(X_input)
+        predictions.append(next_pred[0, 0])
+        next_pred_scaled = scaler.transform(next_pred.reshape(-1, 1))
+        X_input = np.append(X_input[:, 1:, :], next_pred_scaled.reshape(1, 1, 1), axis=1)
+
+    predictions = (scaler.inverse_transform(np.array(predictions).reshape(-1, 1)))*10
+
+    st.markdown("""
+            <div class="container">
+                <p class='left-text-pg6'> Predicción para los próximos 3 días: </p> 
+            </div>  
+            """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col1:
+        for i, pred in enumerate(predictions, 1):
+            st.markdown(f"""
+            <div class="container" style="border: 6px solid #8a05be; padding: 10px; margin-bottom: 10px;border-radius: 15px;">
+                <p class='left-text-pg1'> Día {i}: US$ {pred[0]:.2f} </p> 
+            </div>  
+            """, unsafe_allow_html=True)
+
+
+
 
 # Adicionar CSS al app Streamlit
 css = """
@@ -825,6 +979,17 @@ css = """
         font-family: 'DmSans', sans-serif;
         width: 90%; 
         margin-left: auto;
+        margin-right: auto;
+    }
+    .left-text-pg6 {
+        color: #2f0549;
+        text-align: left;
+        font-size: 1.5em;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        font-family: 'DmSans', sans-serif;
+        width: 90%; 
+        margin-left: 0;
         margin-right: auto;
     }
     .centered-text-pg5 {
