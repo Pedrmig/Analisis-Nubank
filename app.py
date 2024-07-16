@@ -4,8 +4,7 @@ import numpy as np
 from streamlit_option_menu import option_menu
 from plotly.offline import  init_notebook_mode
 import cufflinks as cf
-cufflinks.go_offline(connected=True)
-init_notebook_mode(connected=True)
+
 import streamlit.components.v1 as components
 import random
 import yfinance as yf
