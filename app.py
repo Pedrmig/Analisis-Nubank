@@ -17,9 +17,6 @@ from tensorflow.keras.layers import Dense, LSTM, Input
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import plotly.io as pio
-import os
-import sys
-import contextlib
 
 model = joblib.load('modelo_GBC.pkl')
 
@@ -764,6 +761,7 @@ if selected == "Análisis de Crédito":
         st.write(f"El previsto en el análisis es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}")
 
 
+# Verificar si la opción "Predicción Acciones" fue seleccionada
 if selected == "Predicción Acciones":
     
     st.markdown("""
@@ -775,6 +773,7 @@ if selected == "Predicción Acciones":
     """, unsafe_allow_html=True) 
     st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
 
+    
     ticker = 'NU'
     end_date = date.today()
     start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
@@ -797,28 +796,6 @@ if selected == "Predicción Acciones":
             X.append(a)
             y.append(data[i + time_step, 0])
         return np.array(X), np.array(y)
-
-    
-    cf.go_offline()
-    pio.renderers.default = 'iframe'
-
-    
-    @contextlib.contextmanager
-    def suppress_stdout_stderr():
-        """Suprime la salida a stdout y stderr temporalmente."""
-        with open(os.devnull, 'w') as fnull:
-            old_stdout = sys.stdout
-            old_stderr = sys.stderr
-            sys.stdout = fnull
-            sys.stderr = fnull
-            try:
-                yield
-            finally:
-                sys.stdout = old_stdout
-                sys.stderr = old_stderr
-
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  
-    tf.get_logger().setLevel('ERROR') 
     
     time_step = 60
     train_data_np = train_data['Close'].values.reshape(-1, 1)
@@ -838,36 +815,45 @@ if selected == "Predicción Acciones":
     model.add(Dense(1))
 
     model.compile(optimizer='adam', loss='mean_squared_error')
-    with suppress_stdout_stderr():
-        model.fit(X_train, y_train, batch_size=1, epochs=1)
-    with suppress_stdout_stderr():
-        train_predict = model.predict(X_train)
-        test_predict = model.predict(X_test)
+    model.fit(X_train, y_train, batch_size=1, epochs=1)
+
+    train_predict = model.predict(X_train)
+    test_predict = model.predict(X_test)
+
     train_predict = scaler.inverse_transform(train_predict)
     test_predict = scaler.inverse_transform(test_predict)
     y_train = scaler.inverse_transform([y_train])
     y_test = scaler.inverse_transform([y_test]) 
 
-    
+    # Gráfico interactivo con Plotly
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(x=nu_data['Date'], y=scaler.inverse_transform(nu_data[['Close']]).reshape(-1), mode='lines', name='Valor Real'))
+    # Agregar serie de datos reales
+    fig.add_trace(go.Scatter(x=nu_data['Date'], y=scaler.inverse_transform(nu_data[['Close']]).reshape(-1), 
+                             mode='lines', name='Valor Real'))
 
+    # Agregar predicciones de entrenamiento
     train_predict_plot = np.empty_like(nu_data['Close'])
     train_predict_plot[:] = np.nan
     train_predict_plot[time_step:len(train_predict) + time_step] = train_predict.reshape(-1)
+
     fig.add_trace(go.Scatter(x=nu_data['Date'], y=train_predict_plot, mode='lines', name='Predicción de Entrenamiento'))
 
-
+    # Agregar predicciones de prueba
     test_predict_plot = np.empty_like(nu_data['Close'])
     test_predict_plot[:] = np.nan
     test_predict_plot[len(train_predict) + (time_step*2) + 1:len(nu_data) - 1] = test_predict.reshape(-1)
+
     fig.add_trace(go.Scatter(x=nu_data['Date'], y=test_predict_plot, mode='lines', name='Predicción de Prueba'))
 
-    fig.update_layout(title='Predicción de Acciones', xaxis_title='Fecha', yaxis_title='Precio de Cierre', legend=dict(x=0, y=1, traceorder='normal'))
-    st.plotly_chart(fig)
-    st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+    fig.update_layout(title='Predicción de Acciones',
+                      xaxis_title='Fecha',
+                      yaxis_title='Precio de Cierre',
+                      legend=dict(x=0, y=1, traceorder='normal'))
 
+    st.plotly_chart(fig)
+
+    st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
     st.markdown("""
     <div class="container">
         <p class='centered-text-pg5'>Basándonos en esa información, hacemos una predicción de cuánto estarán las acciones de Nubank en los próximos 3 días.</p>
@@ -876,17 +862,20 @@ if selected == "Predicción Acciones":
     """, unsafe_allow_html=True)
     st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
 
+    
     last_60_days = nu_data['Close'][-60:].values
     last_60_days_scaled = scaler.transform(last_60_days.reshape(-1, 1))
+
     X_input = last_60_days_scaled.reshape(1, -1, 1)
+
     predictions = []
     for _ in range(3):
-        with suppress_stdout_stderr():
-            next_pred = model.predict(X_input)
+        next_pred = model.predict(X_input)
         predictions.append(next_pred[0, 0])
         next_pred_scaled = scaler.transform(next_pred.reshape(-1, 1))
         X_input = np.append(X_input[:, 1:, :], next_pred_scaled.reshape(1, 1, 1), axis=1)
-    predictions = scaler.inverse_transform(np.array(predictions).reshape(-1, 1))
+
+    predictions = (scaler.inverse_transform(np.array(predictions).reshape(-1, 1)))*10
 
     st.markdown("""
             <div class="container">
@@ -895,13 +884,15 @@ if selected == "Predicción Acciones":
             """, unsafe_allow_html=True)
     
     col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
+    with col1:
         for i, pred in enumerate(predictions, 1):
             st.markdown(f"""
-            <div class="container" style="border: 1px solid #8a05be; padding: 10px; margin-bottom: 10px; border-radius: 10px;">
+            <div class="container" style="border: 6px solid #8a05be; padding: 10px; margin-bottom: 10px;border-radius: 15px;">
                 <p class='left-text-pg1'> Día {i}: US$ {pred[0]:.2f} </p> 
             </div>  
             """, unsafe_allow_html=True)
+
+
 
 
 # Adicionar CSS al app Streamlit
