@@ -18,6 +18,8 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import plotly.io as pio
 import os
+import sys
+import contextlib
 
 model = joblib.load('modelo_GBC.pkl')
 
