@@ -100,10 +100,26 @@ if selected == "Empresa":
             html_data = f.read()
         components.html(html_data, height=450)
         
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>Brasil es claramente el mercado principal para Nubank con un crecimiento sustancial en la base de clientes a lo largo de los últimos cuatro años.</p>
+            <p class='sub-figure2'>En cuanto a la expansión de México que comienza en 2021, observamos un crecimiento constante aunque a un ritmo menor, lo que indica un mercado en expansión para Nubank.</p>
+            <p class='sub-figure2'>Nubank parece enfrentarse a desafíos para crecer en Colombia que comienza en 2022 con un crecimiento de clientes menor comparado con los otros dos países.</p>
+            <p class='sub-figure2'>En general Nubank ha incrementado su base de clientes en todos los países analizados con un éxito notable en Brasil y una expansión gradual en México y Colombia, y aunque haya diferentes niveles de éxito, Nubank está comenzando a establecerse en otros mercados latinoamericanos.</p>
+        </div>    
+        """, unsafe_allow_html=True)
+        
         with open("images_negocio/negocios_brasil.html", "r", encoding='utf-8') as f:     
             html_data = f.read()
         components.html(html_data, height=450)
-    
+
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>Nubank está diversificando sus productos, con cada uno muestra un nivel de crecimiento aqunque a diferentes ritmos. Productos como los préstamos personales, contratos de seguros y cuentas de empresas tienen mucho potencial de crecimiento, pero actualmente representan una menor proporción de la base de clientes.</p>
+            <p class='sub-figure2'>NuConta y las tarjetas de crédito son los productos más populares y muestran el mayor crecimiento en número de clientes.</p>
+            <p class='sub-figure2'>Nubank ha tenido un éxito notable en expandir su base de clientes en Brasil, especialmente en sus productos más populares y explorando y creciendo en otros segmentos del mercado financiero.</p>
+        </div>    
+        """, unsafe_allow_html=True)
    
     if tabs == "Financero":
         
@@ -111,17 +127,49 @@ if selected == "Empresa":
             html_data = f.read()
         components.html(html_data, height=450)
         
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>El gráfico proporciona una visión clara del crecimiento en el valor total de los préstamos otorgados por Nubank durante un periodo de 4 años (desde Julio de 2020 hasta Enero de 2024).</p>
+            <p class='sub-figure2'>Muestra un crecimiento sostenido y acelerado en el valor total de los préstamos otorgados por Nubank en los útimos 4 años, esto puede reflejar una expansión exitosa del negocio y una respuesta positiva del mercado, aunque también implica la necesidad de una gestión prudente del riesgo crediticio.</p>
+            <p class='sub-figure2'>Es crucial que Nubank mantenga una gestión de riesgos sólida para asegurar la calidad de los préstamos otorgados.</p>
+        </div>    
+        """, unsafe_allow_html=True)
+        
         with open("images_negocio/atrasos_4anos.html", "r", encoding='utf-8') as f:     
             html_data = f.read()
         components.html(html_data, height=450)
+        
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>El gráfico proporcina una visión clara de la evolución de los porcentajes de atrasos en los pagos de los clientes durante un periodo de 4 años (desde Julio de 2020 hasta Enero de 2024) Los atrasos se dividen en dos categorías, atrasos de 15 a 90 días y de más de 90 días.</p>
+            <p class='sub-figure2'>Se muestra una tendencia de crecimiento en los porcentajes de atrasos tanto a corto como a largo plazo, lo que puede representar un desafío significativo para Nubank en términos de gestión de riesgos y sostenibilidad financiera.</p>
+            <p class='sub-figure2'>Nubank podría considerar implementar programas de apoyo, programas de educación financiera y apoyo en la gestión de deudas de sus clientes para evitar retrasos prolongados ya que los inversores pueden ven el aumento de los atrasos como un riesgo potencial que pueda afectar la rentabilidad de la empresa, por lo que es crucial que Nubank mantenga una gestión proactiva para mitigar este riesgo.</p>
+        </div>    
+        """, unsafe_allow_html=True)
         
         with open("images_negocio/lucro_4anos.html", "r", encoding='utf-8') as f:     
             html_data = f.read()
         components.html(html_data, height=450)
         
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>Nubank ha mostrado una recuperación notable desde mediados de 2023 alcanzando niveles de ganancias significativamente altas a principio de 2024.</p>
+            <p class='sub-figure2'>A lo largo de los cuatro años, el banco ha experimentado fluctuaciones pasando de pérdidas a ganancias notables. la fase más destacada es el rápido crecimiento en las ganancias a partir de enero de 2023, lo cual puede indicar la efectividad de nuevas estrategias o mejoras operativas implementadas por el banco.</p>
+            <p class='sub-figure2'>Este análisis indica que aunque hubo periodos de pérdidas y estabilidad, el banco ha logrado revertir la tendencia y alcanzar un crecimiento sustancial en sus ganancias hacia el final del periodo analizado.</p>
+        </div>    
+        """, unsafe_allow_html=True)
+        
         with open("images_negocio/valor_acciones.html", "r", encoding='utf-8') as f:     
             html_data = f.read()
         components.html(html_data, height=450)
+        
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>La gráfica representa el valor de las acciones de Nubank. Desde su apertura muestra un comportamiento altamente volátil.</p>
+            <p class='sub-figure2'>Se observa una fase inicial de caída tras la apertura seguida por una recuperación hasta mediados de 2022; Una relativa estabilidad con ligera volatilidad hasta finales de 2022, y una bajada hasta principios de 2024; Finalmente se observa una reciente estabilización en Abril de 2024.</p>
+            <p class='sub-figure2'>Este comportamiento refleja la dinámica del mercado que puede influir en el valor de las acciones de una compañía, incluyendo factores internos y externos que afectan la percepción y el valor de la empresa en el mercado bursátil.</p>
+        </div>    
+        """, unsafe_allow_html=True)
 
         
 # PAGE 3----------------------------------
@@ -157,13 +205,8 @@ if selected == "Dataset":
         """, unsafe_allow_html=True)
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
         
-        col1, col2 = st.columns([1,1])
-        with col1:
-            st.image('images_dataset/nulos.png', use_column_width=True)
-        with col2:
-            st.image('images_dataset/nulos_arreglados.png', use_column_width=True)
-        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-
+        st.image('images_dataset/nulos.png', use_column_width=True)
+        
         st.markdown("""
         <div class="container">
         <p class='up-figure-text'>La tabla a continuación presenta un análisis estadístico de los datos después de la limpieza.</p>
@@ -274,6 +317,41 @@ if selected == "Dataset":
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)    
         st.image('images_dataset/variables.png', use_column_width=True)
         
+        st.markdown("""
+<div class="container">
+    <p class='sub-figure2'>Distribución de puntaje1</p>
+    <p class='sub-figure2'>La gráfica muestra varios picos pronunciados, lo que sugiere que hay algunos valores de puntaje1 que son mucho más comunes que otros, y que la variable no sigue una distribución normal simple.</p>
+    <p class='sub-figure2'>Distribución de puntaje2</p>
+    <p class='sub-figure2'>Similar a puntaje1, puntaje2 también muestra múltiples picos, aunque parecen ser más dispersos. La distribución no es uniforme y hay varios puntos donde los valores se agrupan.</p>
+    <p class='sub-figure2'>Distribución de puntaje3</p>
+    <p class='sub-figure2'>La distribución de puntaje3 se asemeja a una distribución normal, con una forma de campana simétrica. La mayoría de los valores están concentrados en el centro, con menos valores en los extremos.</p>
+    <p class='sub-figure2'>Distribución de tasa de riesgo</p>
+    <p class='sub-figure2'>La tasa de riesgo muestra una distribución aproximadamente normal, aunque con cierta asimetría hacia la derecha. La mayoría de los valores están en el rango de 0.2 a 0.5.</p>
+    <p class='sub-figure2'>Distribución de límite de crédito</p>
+    <p class='sub-figure2'>La mayoría de los valores de límite de crédito están cerca de 0, con muy pocos valores altos. Hay un pico pronunciado al inicio y una larga cola hacia la derecha, indicando una distribución sesgada.</p>
+    <p class='sub-figure2'>Distribución de ganancias</p>
+    <p class='sub-figure2'>La distribución de ganancias es altamente sesgada hacia la derecha, con la mayoría de los valores concentrados cerca de 0. Muy pocos individuos tienen ganancias significativamente altas.</p>
+    <p class='sub-figure2'>Distribución de número de quiebras</p>
+    <p class='sub-figure2'>La mayoría de las personas no tienen quiebras (0), con muy pocos casos de 1 o más quiebras. Distribución altamente sesgada hacia la izquierda.</p>
+    <p class='sub-figure2'>Distribución de préstamos incumplidos</p>
+    <p class='sub-figure2'>La mayoría de los individuos no tienen préstamos incumplidos (0), existen pocos casos de 1 o más incumplimientos. La distribución está altamente sesgada hacia la izquierda.</p>
+    <p class='sub-figure2'>Distribución de número de cuentas</p>
+    <p class='sub-figure2'>La mayoría de los individuos tienen entre 0 y 20 cuentas, con una distribución que parece ligeramente sesgada hacia la derecha. Hay una disminución gradual en el número de cuentas más altas.</p>
+    <p class='sub-figure2'>Distribución de número de asuntos</p>
+    <p class='sub-figure2'>Similar a número de cuentas, la mayoría de los individuos tienen pocos asuntos, con una disminución gradual hacia números más altos. Hay un pico al inicio y una larga cola hacia la derecha.</p>
+    <p class='sub-figure2'>Distribución de Verificaciones de crédito del proveedor de datos externo el mes pasado</p>
+    <p class='sub-figure2'>La mayoría de las verificaciones de crédito están en el rango de 0 a 3, con picos en valores enteros. Hay una periodicidad en los picos, sugiriendo que las verificaciones pueden ocurrir en intervalos específicos.</p>
+    <p class='sub-figure2'>Distribución de puntuación de fraude del proveedor de datos externos</p>
+    <p class='sub-figure2'>La puntuación de fraude está distribuida de manera bastante uniforme entre 0 y 1000. No hay picos o modos claros, indicando una distribución relativamente plana.</p>
+    <p class='sub-figure2'>Distribución de última cantidad prestada</p>
+    <p class='sub-figure2'>La mayoría de los valores de la última cantidad prestada están cerca de 0, con muy pocos valores altos. Hay un pico pronunciado al inicio y una larga cola hacia la derecha, indicando una distribución sesgada.</p>
+    <p class='sub-figure3'>En general, las distribuciones de las variables muestran que muchas de ellas están altamente sesgadas, con valores concentrados en un extremo y colas largas hacia el otro. Las variables relacionadas con puntuaciones (puntaje1, puntaje2, puntaje3) tienen distribuciones más variadas, algunas con múltiples modos y otras más normales. La tasa de riesgo y las ganancias también muestran distribuciones interesantes que pueden ser importantes para el análisis del riesgo y el comportamiento financiero de los clientes.</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+
+        
     #if tabs == "Visualizaciones":
         
     if tabs == "Prediccion":
@@ -305,10 +383,6 @@ if selected == "Dataset":
             """, unsafe_allow_html=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
             st.image('images_dataset/n_antes.png', use_column_width=True)
-            st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('images_dataset/matriz_confusion.png', use_column_width=True)
-            st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('images_dataset/variable_target.png', use_column_width=True)
         
         with col2:
             st.markdown("""
@@ -317,11 +391,42 @@ if selected == "Dataset":
             </div>    
             """, unsafe_allow_html=True)
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-            st.image('images_dataset/n_depois.png', use_column_width=True)
+            st.image('images_dataset/n_depois.png', use_column_width=True)    
+            
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>Comparando ambos modelos se observa que el primer modelo tiene una alta precisión y recall para la clase 0, pero su desempeño en la calse 1 es muy pobre (bajo recall y F1-Score), el segundo modelo tiene un balance mucho mejor entre las clases con valores de precisión, recall y F1-score más equilibrados.</p>
+            <p class='sub-figure2'>Ambos modelos tienen una exactitud similar, 0.86 para el primero modelo y 0.85 para el segundo.</p>
+            <p class='sub-figure2'>El segundo modelo tiene un AUC significativamente mejor (0.8484) en comparación con el primero (0.5581), lo que indica que el segundo modelo es mejor en términos de su capacidad de discriminar entre las clases.</p>
+            <p class='sub-figure2'>En conclusión, aunque ambos modelos tiene una exactitud similar, el segundo modelo es claramente superior en términos de balance y capacidad discriminativa, como lo demuestra su AUC mucho más alto.</p>
+        </div>    
+        """, unsafe_allow_html=True)    
+        
+        col1, col2 = st.columns([1,1])
+        with col1: 
+            st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+            st.image('images_dataset/matriz_confusion.png', use_column_width=True)
+            
+        with col2:
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
             st.image('images_dataset/matriz_confusion_arreglado.png', use_column_width=True)
+        
+        st.markdown("""
+        <div class="container">
+            <p class='sub-figure2'>El primer modelo tiene un excelente desempeño en la clase 0 con muy pocos falsos positivos y muchos verdaderos negativos, sin embargo, tiene un desempeño muy pobre en la clase 1 con muchos falsos negativos y pocos verdaderos positivos.</p>
+            <p class='sub-figure2'>El segundo modelo es más equilibrado; Aunque tiene más falsos positivos en la clase 0, tiene un desempeño mucho mejor en la clase 1, con muchos más verdaderos positivos y menos falsos negativos.</p>
+            <p class='sub-figure2'>Estas observaciones coinciden con los resultados de las métricas previsas, donde el segundo modelo mostraba un mejor balance entre precisión y recall para ambas clases, así como un AUC significativamente mejor. El segundo modelo ofrece un rendimiento global mucho mejor, especialmente en la detección de la clase 1.</p>
+        </div>    
+        """, unsafe_allow_html=True) 
+            
+        col1, col2 = st.columns([1,1])
+        with col1:
+            st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+            st.image('images_dataset/variable_target.png', use_column_width=True)
+        with col2:    
             st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
             st.image('images_dataset/variable_target_arreglado.png', use_column_width=True)
+
 
     if tabs == "Visualizaciones":
         
@@ -755,6 +860,12 @@ css = """
     .sub-figure2 {
         text-align: left;
         font-size: 10px;
+        margin-bottom: 5px;
+        color: black; 
+    }
+    .sub-figure3 {
+        text-align: left;
+        font-size: 15px;
         margin-bottom: 5px;
         color: #727683; 
     }
