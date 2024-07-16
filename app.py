@@ -778,7 +778,7 @@ if selected == "Predicción Acciones":
     end_date = date.today()
     start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
 
-    nu_data = yf.download(ticker, start=start_date, end=end_date)
+    nu_data = yf.download(ticker, start=start_date, end=end_date, progress=False)
     nu_data = nu_data.reset_index()
     nu_data = nu_data[['Date', 'Close']]
     nu_data = nu_data.dropna()
