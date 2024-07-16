@@ -797,6 +797,8 @@ if selected == "Predicción Acciones":
             y.append(data[i + time_step, 0])
         return np.array(X), np.array(y)
 
+    tf.autograph.set_verbosity(3)
+    
     time_step = 60
     train_data_np = train_data['Close'].values.reshape(-1, 1)
     test_data_np = test_data['Close'].values.reshape(-1, 1)
