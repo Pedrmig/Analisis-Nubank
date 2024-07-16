@@ -776,7 +776,6 @@ if selected == "Predicción Acciones":
     """, unsafe_allow_html=True) 
     st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
 
-    
     ticker = 'NU'
     end_date = date.today()
     start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
@@ -841,11 +840,15 @@ if selected == "Predicción Acciones":
     model.add(Dense(1))
 
     model.compile(optimizer='adam', loss='mean_squared_error')
+    
+    # Suprimir la salida durante el entrenamiento del modelo
     with suppress_stdout_stderr():
         model.fit(X_train, y_train, batch_size=1, epochs=1)
 
-    train_predict = model.predict(X_train)
-    test_predict = model.predict(X_test)
+    # Suprimir la salida durante la predicción del modelo
+    with suppress_stdout_stderr():
+        train_predict = model.predict(X_train)
+        test_predict = model.predict(X_test)
 
     train_predict = scaler.inverse_transform(train_predict)
     test_predict = scaler.inverse_transform(test_predict)
@@ -897,7 +900,8 @@ if selected == "Predicción Acciones":
 
     predictions = []
     for _ in range(3):
-        next_pred = model.predict(X_input)
+        with suppress_stdout_stderr():
+            next_pred = model.predict(X_input)
         predictions.append(next_pred[0, 0])
         next_pred_scaled = scaler.transform(next_pred.reshape(-1, 1))
         X_input = np.append(X_input[:, 1:, :], next_pred_scaled.reshape(1, 1, 1), axis=1)
@@ -918,6 +922,7 @@ if selected == "Predicción Acciones":
                 <p class='left-text-pg1'> Día {i}: US$ {pred[0]:.2f} </p> 
             </div>  
             """, unsafe_allow_html=True)
+
 
 
 
