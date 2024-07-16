@@ -17,6 +17,7 @@ from tensorflow.keras.layers import Dense, LSTM, Input
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import plotly.io as pio
+import os
 
 model = joblib.load('modelo_GBC.pkl')
 
@@ -797,7 +798,8 @@ if selected == "Predicción Acciones":
             y.append(data[i + time_step, 0])
         return np.array(X), np.array(y)
 
-    tf.autograph.set_verbosity(3)
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
+    tf.get_logger().setLevel('ERROR')
     
     time_step = 60
     train_data_np = train_data['Close'].values.reshape(-1, 1)
