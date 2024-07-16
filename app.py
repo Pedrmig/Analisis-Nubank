@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from streamlit_option_menu import option_menu
 from plotly.offline import  init_notebook_mode
-import cufflinks
+import cufflinks as cf
 cufflinks.go_offline(connected=True)
 init_notebook_mode(connected=True)
 import streamlit.components.v1 as components
@@ -17,6 +17,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Input
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
+import plotly.io as pio
 
 model = joblib.load('modelo_GBC.pkl')
 
@@ -1024,7 +1025,7 @@ css = """
     }
     .sub-figure2 {
         text-align: left;
-        font-size: 10px;
+        font-size: 15px;
         margin-bottom: 5px;
         color: black; 
     }
