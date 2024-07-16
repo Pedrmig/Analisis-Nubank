@@ -798,8 +798,28 @@ if selected == "Predicción Acciones":
             y.append(data[i + time_step, 0])
         return np.array(X), np.array(y)
 
-    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' 
-    tf.get_logger().setLevel('ERROR')
+    # Configuración de Cufflinks y Plotly
+    cf.go_offline()
+    pio.renderers.default = 'iframe'
+
+    # Función para suprimir la salida a stdout y stderr
+    @contextlib.contextmanager
+    def suppress_stdout_stderr():
+        """Suprime la salida a stdout y stderr temporalmente."""
+        with open(os.devnull, 'w') as fnull:
+            old_stdout = sys.stdout
+            old_stderr = sys.stderr
+            sys.stdout = fnull
+            sys.stderr = fnull
+            try:
+                yield
+            finally:
+                sys.stdout = old_stdout
+                sys.stderr = old_stderr
+
+    # Configurar el nivel de verbosidad de los logs de TensorFlow
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Filtro de logs de TensorFlow: 0 (todos), 1 (filtro INFO), 2 (filtro WARNING), 3 (filtro ERROR)
+    tf.get_logger().setLevel('ERROR')  # Establecer el nivel de log de TensorFlow a ERROR
     
     time_step = 60
     train_data_np = train_data['Close'].values.reshape(-1, 1)
@@ -819,7 +839,8 @@ if selected == "Predicción Acciones":
     model.add(Dense(1))
 
     model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(X_train, y_train, batch_size=1, epochs=1)
+    with suppress_stdout_stderr():
+        model.fit(X_train, y_train, batch_size=1, epochs=1)
 
     train_predict = model.predict(X_train)
     test_predict = model.predict(X_test)
