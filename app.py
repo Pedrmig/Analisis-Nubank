@@ -577,188 +577,277 @@ if selected == "Indagaciones":
 
 # PAGE 5----------------------------------
 if selected == "Análisis de Crédito": 
-
-    # Función para predecir
-    def predict_price(model, input_data):
-        prediction = model.predict([input_data])
-        return prediction[0]
-
+    
     st.markdown("""
-    <div class="container">
-        <h1 class='centered-title-pg1'>Análisis de Crédito</h1>
-        <p class='centered-text-pg5'> Aquí se puede ver el funcionamiento de la Análisis de Crédito</p>
-        <p class='centered-text-pg5'> Pero como algunas informaciones estan encriptadas por el banco, las vamos a rellenar al azar.</p>
-        <p class='centered-text-pg5'> Algunas de esas informaciones son de órganos y bases externas que los bancos cuentan para hacer sus análisis.</p>
-        .
-    </div>    
-    """, unsafe_allow_html=True) 
-
-    st.markdown("""
-    <div class="container"; style="background-color: black>
-        <h1 class='left-text-pg1'>Selecione los valores: </h1>
-    </div>    
-    """, unsafe_allow_html=True) 
-        
-    col1, col2, col3 = st.columns([1, 2, 1])
-
-    state_map_1  = {1: 'Acre', 
-                    2: 'Alagoas', 
-                    3: 'Amapá', 
-                    4: 'Amazonas', 
-                    5: 'Bahia', 
-                    6: 'Ceará', 
-                    7: 'Distrito Federal', 
-                    8: 'Espírito Santo', 
-                    9: 'Goiás', 
-                    10: 'Maranhão',
-                    11: 'Mato Grosso', 
-                    12: 'Mato Grosso do Sul', 
-                    13: 'Minas Gerais', 
-                    14: 'Pará', 
-                    15: 'Paraíba', 
-                    16: 'Paraná', 
-                    17: 'Pernambuco', 
-                    18: 'Piauí', 
-                    19: 'Rio de Janeiro', 
-                    20: 'Rio Grande do Norte',
-                    21: 'Rio Grande do Sul', 
-                    22: 'Rondônia', 
-                    23: 'Roraima', 
-                    24: 'Santa Catarina', 
-                    25: 'São Paulo', 
-                    26: 'Sergipe', 
-                    27: 'Tocantins'}
-    
-    state_list = list(state_map_1.values())
-    
-    marketing_channel_map = {2: 'Invitacion-email', 6: 'Radio-commercial', 8: 'lista-Espera', 9: 'Página-Web',
-                                7: 'Twitter', 0: 'Facebook', 5: 'Ningun', 1: 'Instagram', 3: 'Invitacion-web', 4: 'LinkedIn'}
-    marketing_channel_list = list(marketing_channel_map.values())
-    
-    n_issues_map = [11,  7,  0, 12, 44, 42, 43,  9, 14, 40,  6,  5, 17, 16,  4, 41,  8,
-                    10, 15, 35,  3, 24, 18, 19, 25, 13, 21, 32, 20, 23, 22, 36, 29, 39,
-                    2, 26, 27, 34, 38, 28, 31, 30,  1, 37, 33]
-    
-    
-    # fazer um selectbox
-    with col1:
-        selected_state = st.selectbox("Ciudad de Morada", state_list)
-        state = {value: key for key, value in state_map_1.items()}[selected_state]
-        
-        selected_marketing_channel = st.selectbox("Canal de Marketing", marketing_channel_list)
-        marketing_channel = {value: key for key, value in marketing_channel_map.items()}[selected_marketing_channel]
-        
-        n_issues = st.selectbox("Disponibilidad en el Año", n_issues_map)
-    
-    # somente number imputs
-    with col2:
-        last_amount_borrowed = st.number_input("Último valor tomado de prestamo", min_value=0)
-        last_borrowed_in_months = st.number_input("Número de meses del ultimo prestamo", min_value=0)
-        credit_limit = st.number_input("Límite de Credito", min_value=0)
-    with col3:
-        income = st.number_input("Recibimientos anuales", min_value=0)
-        n_bankruptcies = st.number_input("Vezes que has falido", min_value=0)
-        n_accounts = st.number_input("Cuentas que posee", min_value=0)
-    
-    
-    # preenchimento automatico
-    job_name = random.choice([25660,  3865, 25888, 17327,  1549, 26755])
-    score_1 = random.choice([0, 3, 2, 1, 4, 6, 5])
-    score_2 = random.choice([10, 16,  9, 21,  1, 30, 19,  2, 17, 13, 26, 15,  7,  6, 11, 14, 22,
-                27, 34, 20, 32, 28, 24, 31, 23, 29,  0, 12, 25, 18,  8, 33,  4,  5, 3])
-    score_3 = random.choice([28, 30, 29, 46, 45, 23, 17, 26, 32, 27, 40, 34, 24, 10, 13, 54, 20,
-                18, 25, 36, 39, 16, 37, 48, 41, 19, 21, 52,  9, 14, 58, 47, 51, 43,
-                12, 38, 15, 42, 35,  8,  7,  5, 75, 31, 49, 50, 61, 77,  6, 53,  1,
-                65, 59, 60,  2, 56,  3,  4, 63, 57, 70, 62, 66, 64, 73, 67, 69, 79,
-                84, 68, 44, 22, 11, 72, 55, 78, 76, 74, 33, 71, 80, 85, 82, 86, 83, 81,  0])
-    score_4 = random.choice([101.80083171,  97.06261531, 100.02707252,  99.47802033, 102.02551196, 101.86156217])
-    score_5 = random.choice([0.25955467, 0.94265452, 0.3519176 , 0.85679069, 0.27535171, 0.95836311])
-    score_6 = random.choice([108.42727282,  92.00254553, 112.89245295, 99.25724666, 108.56139562,  98.90068244])
-    external_data_provider_credit_checks_last_2_year = random.choice([0, 1])
-    external_data_provider_credit_checks_last_month = random.choice([2, 1, 3, 0])
-    external_data_provider_fraud_score = random.choice([645, 243,  65, 303, 387, 656, 432 , 137 , 285])
-    target_fraud = random.choice([0, 1, 2])
-    reported_income = income
-    risk_rate = random.choice([39, 23, 28, 31, 17, 43, 42, 32, 35, 21, 11, 26, 33, 37, 24, 12, 14,
-                    18, 22, 27, 20, 34, 40, 41, 25, 30, 29, 50,  7, 16, 19,  8, 44, 45,
-                    36, 15, 38, 48, 10, 53, 47,  3, 58,  6, 49, 57, 52, 46,  9, 13,  4,
-                    51, 71, 54, 55,  5, 56, 60, 69, 59, 61, 64, 62, 78, 77, 76, 65,  2,
-                    63, 72, 74, 66, 67, 68, 73,  0, 70, 80, 75,  1, 79])
-    real_state = random.choice([1, 3, 4, 2, 0])
-    n_defaulted_loans = random.choice([1, 2, 0, 3, 4, 5])
-    external_data_provider_credit_checks_last_year = random.choice([1, 0, 2] )
-
-    st.markdown("""
-    <div class="container">
-        <h1 class='left-text-pg1'>Valores Selecionados al azar por estar encriptados: </h1>
-    </div>    
-    """, unsafe_allow_html=True) 
-    col1, col2, col3 = st.columns([1, 2, 1])
-    
-    with col1:
-        html_content = f"""
         <div class="container">
-            <p class='analisis-credito'> Score 1: {score_1} </p>
-            <p class='analisis-credito'> Score 2: {score_2} </p>
-            <p class='analisis-credito'> Score 3: {score_3} </p>
-            <p class='analisis-credito'> Score 4: {score_4} </p>
-            <p class='analisis-credito'> Score 5: {score_5} </p>
-        
+            <h1 class='centered-title-pg1'>Análisis de Crédito</h1>
         </div>    
-        """
-        st.markdown(html_content, unsafe_allow_html=True)
+        """, unsafe_allow_html=True) 
 
-    with col2:
-        html_content = f"""
-        <div class="container">
-            <p class='analisis-credito'> Score 6: {score_6} </p>
-            <p class='analisis-credito'> External Data Provider Credit Checks Last 2 Years: {external_data_provider_credit_checks_last_2_year} </p>
-            <p class='analisis-credito'> External Data Provider Credit Checks Last Month: {external_data_provider_credit_checks_last_month} </p>
-            <p class='analisis-credito'> External Data Provider Fraud Score: {external_data_provider_fraud_score} </p>
-            <p class='analisis-credito'> External Data Provider Credit Checks Last Year: {external_data_provider_credit_checks_last_year} </p>
-        
-        </div>    
-        """
-        st.markdown(html_content, unsafe_allow_html=True)
-       
-    with col3:
-        html_content = f"""
-        <div class="container">
-            <p class='analisis-credito'> Job Name: {job_name} </p>
-            <p class='analisis-credito'> Target Fraud: {target_fraud} </p>
-            <p class='analisis-credito'> Risk Rate: {risk_rate} </p>
-            <p class='analisis-credito'> Real State: {real_state} </p>
-            <p class='analisis-credito'> N Defaulted Loans: {n_defaulted_loans} </p>
-        
-        </div>    
-        """
-        st.markdown(html_content, unsafe_allow_html=True)
-        
-    # Preparar los datos de entrada
-    input_data = [score_1, score_2, score_3, score_4, score_5, score_6,
-                    risk_rate, last_amount_borrowed, last_borrowed_in_months,
-                    credit_limit, income, state, job_name, real_state,
-                    n_bankruptcies, n_defaulted_loans, n_accounts, n_issues,
-                    external_data_provider_credit_checks_last_2_year,
-                    external_data_provider_credit_checks_last_month,
-                    external_data_provider_credit_checks_last_year,
-                    external_data_provider_fraud_score, marketing_channel,
-                    reported_income, target_fraud]
+    tabs = option_menu(None, ["Vista Banco", "Vista Cliente"],
+                    icons=['1-circle', '2-circle'],
+                    menu_icon="cast", default_index=0, orientation="horizontal",
+                    styles={
+                    "container": {"padding": "0", "background-color": "#b7bac3", "border-radius": "0px"},
+                    "icon": {"color": "#8a05be", "font-size": "25px"},
+                    "menu-icon": {"color": "#8a05be", "font-size": "25px"},  
+                    "nav-link": {"font-size": "16px", "text-align": "left", "margin": "0px", "--hover-color": "#eee"},
+                    "nav-link-selected": {"background-color": "#2f0549"}},
+                ) 
     
-    input_data_azure = [score_1, score_2, score_3, score_4, score_5, score_6,
-                    risk_rate, last_amount_borrowed, last_borrowed_in_months,
-                    credit_limit, income, job_name,
-                    n_bankruptcies, n_defaulted_loans, n_accounts, n_issues,
-                    external_data_provider_credit_checks_last_2_year,
-                    external_data_provider_credit_checks_last_month,
-                    external_data_provider_credit_checks_last_year,
-                    external_data_provider_fraud_score, marketing_channel,
-                    reported_income, target_fraud]
+    if tabs == "Vista Banco":
+        # Función para predecir
+        def predict_price(model, input_data):
+            prediction = model.predict([input_data])
+            return prediction[0]
 
-    # Analisis de Credito
-    if st.button("Análisis de Credito"):
-        predicted = predict_price(model, input_data)
-        st.write(f"El previsto en el análisis es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}")
+        st.markdown("""
+        <div class="container">
+            <p class='centered-text-pg5'> Aquí se puede ver el funcionamiento de la Análisis de Crédito vista de Empresa</p>
+            <p class='centered-text-pg5'> Algunas informaciones estan encriptadas por el banco o son de órganos y bases externas, asi que las vamos a rellenar automaticamente.</p>
+        </div>    
+        """, unsafe_allow_html=True) 
+        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="container">
+            <p class='left-text-pg6'>Simulación de Análisis.</p>
+        </div>    
+        """, unsafe_allow_html=True)
+            
+        col1, col2, col3 = st.columns([1, 2, 1])
+
+        state_map_1  = {1: 'Acre', 
+                        2: 'Alagoas', 
+                        3: 'Amapá', 
+                        4: 'Amazonas', 
+                        5: 'Bahia', 
+                        6: 'Ceará', 
+                        7: 'Distrito Federal', 
+                        8: 'Espírito Santo', 
+                        9: 'Goiás', 
+                        10: 'Maranhão',
+                        11: 'Mato Grosso', 
+                        12: 'Mato Grosso do Sul', 
+                        13: 'Minas Gerais', 
+                        14: 'Pará', 
+                        15: 'Paraíba', 
+                        16: 'Paraná', 
+                        17: 'Pernambuco', 
+                        18: 'Piauí', 
+                        19: 'Rio de Janeiro', 
+                        20: 'Rio Grande do Norte',
+                        21: 'Rio Grande do Sul', 
+                        22: 'Rondônia', 
+                        23: 'Roraima', 
+                        24: 'Santa Catarina', 
+                        25: 'São Paulo', 
+                        26: 'Sergipe', 
+                        27: 'Tocantins'}
+        
+        state_list = list(state_map_1.values())
+        
+        marketing_channel_map = {2: 'Invitacion-email', 6: 'Radio-commercial', 8: 'lista-Espera', 9: 'Página-Web',
+                                    7: 'Twitter', 0: 'Facebook', 5: 'Ningun', 1: 'Instagram', 3: 'Invitacion-web', 4: 'LinkedIn'}
+        marketing_channel_list = list(marketing_channel_map.values())
+        
+        n_issues_map = [11,  7,  0, 12, 44, 42, 43,  9, 14, 40,  6,  5, 17, 16,  4, 41,  8,
+                        10, 15, 35,  3, 24, 18, 19, 25, 13, 21, 32, 20, 23, 22, 36, 29, 39,
+                        2, 26, 27, 34, 38, 28, 31, 30,  1, 37, 33]
+        
+        
+        # fazer um selectbox
+        with col1:
+            selected_state = st.selectbox("Ciudad de Morada", state_list)
+            state = {value: key for key, value in state_map_1.items()}[selected_state]
+            
+            selected_marketing_channel = st.selectbox("Canal de Marketing", marketing_channel_list)
+            marketing_channel = {value: key for key, value in marketing_channel_map.items()}[selected_marketing_channel]
+            
+            n_issues = st.selectbox("Disponibilidad en el Año", n_issues_map)
+        
+        # somente number imputs
+        with col2:
+            last_amount_borrowed = st.number_input("Último valor tomado de prestamo", min_value=0)
+            last_borrowed_in_months = st.number_input("Número de meses del ultimo prestamo", min_value=0)
+            credit_limit = st.number_input("Límite de Credito", min_value=0)
+        with col3:
+            income = st.number_input("Recibimientos anuales", min_value=0)
+            n_bankruptcies = st.number_input("Vezes que has falido", min_value=0)
+            n_accounts = st.number_input("Cuentas que posee", min_value=0)
+        
+        
+        # preenchimento automatico
+        job_name = random.choice([25660,  3865, 25888, 17327,  1549, 26755])
+        score_1 = random.choice([0, 3, 2, 1, 4, 6, 5])
+        score_2 = random.choice([10, 16,  9, 21,  1, 30, 19,  2, 17, 13, 26, 15,  7,  6, 11, 14, 22,
+                    27, 34, 20, 32, 28, 24, 31, 23, 29,  0, 12, 25, 18,  8, 33,  4,  5, 3])
+        score_3 = random.choice([28, 30, 29, 46, 45, 23, 17, 26, 32, 27, 40, 34, 24, 10, 13, 54, 20,
+                    18, 25, 36, 39, 16, 37, 48, 41, 19, 21, 52,  9, 14, 58, 47, 51, 43,
+                    12, 38, 15, 42, 35,  8,  7,  5, 75, 31, 49, 50, 61, 77,  6, 53,  1,
+                    65, 59, 60,  2, 56,  3,  4, 63, 57, 70, 62, 66, 64, 73, 67, 69, 79,
+                    84, 68, 44, 22, 11, 72, 55, 78, 76, 74, 33, 71, 80, 85, 82, 86, 83, 81,  0])
+        score_4 = random.choice([101.80083171,  97.06261531, 100.02707252,  99.47802033, 102.02551196, 101.86156217])
+        score_5 = random.choice([0.25955467, 0.94265452, 0.3519176 , 0.85679069, 0.27535171, 0.95836311])
+        score_6 = random.choice([108.42727282,  92.00254553, 112.89245295, 99.25724666, 108.56139562,  98.90068244])
+        external_data_provider_credit_checks_last_2_year = random.choice([0, 1])
+        external_data_provider_credit_checks_last_month = random.choice([2, 1, 3, 0])
+        external_data_provider_fraud_score = random.choice([645, 243,  65, 303, 387, 656, 432 , 137 , 285])
+        target_fraud = random.choice([0, 1, 2])
+        reported_income = income
+        risk_rate = random.choice([39, 23, 28, 31, 17, 43, 42, 32, 35, 21, 11, 26, 33, 37, 24, 12, 14,
+                        18, 22, 27, 20, 34, 40, 41, 25, 30, 29, 50,  7, 16, 19,  8, 44, 45,
+                        36, 15, 38, 48, 10, 53, 47,  3, 58,  6, 49, 57, 52, 46,  9, 13,  4,
+                        51, 71, 54, 55,  5, 56, 60, 69, 59, 61, 64, 62, 78, 77, 76, 65,  2,
+                        63, 72, 74, 66, 67, 68, 73,  0, 70, 80, 75,  1, 79])
+        real_state = random.choice([1, 3, 4, 2, 0])
+        n_defaulted_loans = random.choice([1, 2, 0, 3, 4, 5])
+        external_data_provider_credit_checks_last_year = random.choice([1, 0, 2] )
+
+        st.markdown("""
+        <div class="container">
+            <h1 class='left-text-pg1'>Valores rellenados automáticamente por encriptación o por venir de un órgano externo: </h1>
+        </div>    
+        """, unsafe_allow_html=True) 
+        col1, col2, col3 = st.columns([1, 2, 1])
+        
+        with col1:
+            html_content = f"""
+            <div class="container">
+                <p class='analisis-credito'> Score 1: {score_1} </p>
+                <p class='analisis-credito'> Score 2: {score_2} </p>
+                <p class='analisis-credito'> Score 3: {score_3} </p>
+                <p class='analisis-credito'> Score 4: {score_4} </p>
+                <p class='analisis-credito'> Score 5: {score_5} </p>
+            
+            </div>    
+            """
+            st.markdown(html_content, unsafe_allow_html=True)
+
+        with col2:
+            html_content = f"""
+            <div class="container">
+                <p class='analisis-credito'> Score 6: {score_6} </p>
+                <p class='analisis-credito'> External Data Provider Credit Checks Last 2 Years: {external_data_provider_credit_checks_last_2_year} </p>
+                <p class='analisis-credito'> External Data Provider Credit Checks Last Month: {external_data_provider_credit_checks_last_month} </p>
+                <p class='analisis-credito'> External Data Provider Fraud Score: {external_data_provider_fraud_score} </p>
+                <p class='analisis-credito'> External Data Provider Credit Checks Last Year: {external_data_provider_credit_checks_last_year} </p>
+            
+            </div>    
+            """
+            st.markdown(html_content, unsafe_allow_html=True)
+        
+        with col3:
+            html_content = f"""
+            <div class="container">
+                <p class='analisis-credito'> Job Name: {job_name} </p>
+                <p class='analisis-credito'> Target Fraud: {target_fraud} </p>
+                <p class='analisis-credito'> Risk Rate: {risk_rate} </p>
+                <p class='analisis-credito'> Real State: {real_state} </p>
+                <p class='analisis-credito'> N Defaulted Loans: {n_defaulted_loans} </p>
+            
+            </div>    
+            """
+            st.markdown(html_content, unsafe_allow_html=True)
+            
+        # Preparar los datos de entrada
+        input_data = [score_1, score_2, score_3, score_4, score_5, score_6,
+                        risk_rate, last_amount_borrowed, last_borrowed_in_months,
+                        credit_limit, income, state, job_name, real_state,
+                        n_bankruptcies, n_defaulted_loans, n_accounts, n_issues,
+                        external_data_provider_credit_checks_last_2_year,
+                        external_data_provider_credit_checks_last_month,
+                        external_data_provider_credit_checks_last_year,
+                        external_data_provider_fraud_score, marketing_channel,
+                        reported_income, target_fraud]
+        
+        input_data_azure = [score_1, score_2, score_3, score_4, score_5, score_6,
+                        risk_rate, last_amount_borrowed, last_borrowed_in_months,
+                        credit_limit, income, job_name,
+                        n_bankruptcies, n_defaulted_loans, n_accounts, n_issues,
+                        external_data_provider_credit_checks_last_2_year,
+                        external_data_provider_credit_checks_last_month,
+                        external_data_provider_credit_checks_last_year,
+                        external_data_provider_fraud_score, marketing_channel,
+                        reported_income, target_fraud]
+
+        # Analisis de Credito
+        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+        if st.button("Análisis de Credito"):
+            predicted = predict_price(model, input_data)
+            st.markdown(f"""
+                <div class="container">
+                    <p class='left-text-pg1'>El previsto en el análisis es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}</p>
+                </div> """, unsafe_allow_html=True)
+
+    if tabs == "Vista Cliente":
+        st.markdown("""
+        <div class="container">
+            <p class='centered-text-pg5'>Aquí se puede ver un ejemplo de análisis de crédito desde la perspectiva del cliente.</p>
+            <p class='centered-text-pg5'>El banco tiene algunas informaciones y otras necesitamos proporcionarlas para obtener el crédito.</p>
+        </div>    
+        """, unsafe_allow_html=True)
+        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+
+
+        def calcular_valor_cuota(valor_prestamo, meses, tasa_interes):
+            tasa_mensual = tasa_interes / 100 / 12
+            cuota = valor_prestamo * (tasa_mensual * (1 + tasa_mensual)**meses) / ((1 + tasa_mensual)**meses - 1)
+            return cuota
+
+        st.markdown("""
+        <div class="container">
+            <p class='left-text-pg7'>Simulación de Préstamo.</p>
+        </div>    
+        """, unsafe_allow_html=True)
+
+        col1, col2, col3 = st.columns([1, 1, 1])
+        with col1:
+            valor_prestamo = st.number_input('Valor solicitado prestado', min_value=0.0, step=0.01)
+        with col2:
+            meses = st.number_input('Cantidad de meses de la cuota', min_value=1, step=1)
+        with col3:
+            tasa_interes = st.number_input('Tasa de interés anual (%)', min_value=0.0, step=0.01)
+
+        if st.button('Calcular cuota'):
+            cuota = calcular_valor_cuota(valor_prestamo, meses, tasa_interes)
+            st.session_state['cuota'] = cuota
+            st.markdown(f"""
+            <div class="container">
+                <p class='left-text-pg7'>El valor de la cuota mensual es: $ {cuota:.2f}</p>
+            </div> """, unsafe_allow_html=True)
+        
+        st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
+        
+        col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
+        with col1:    
+            empleado = st.selectbox('¿Está empleado?', ('Sí', 'No'))
+        with col2:
+            if empleado == 'Sí':
+                tipo_empleo = st.selectbox('¿Su empleo es?', ('Indefinido', 'Temporal'))
+            else:
+                tipo_empleo = 'Desempleado'
+        with col3:    
+            renta_mensual = st.number_input('Valor de la renta mensual', min_value=0.0, step=0.01)
+        with col4:    
+            analisis = st.selectbox('Análisis de crédito', ('Potencial buen pagador', 'Potencial mal pagador'))
+            
+            # Decisión del préstamo
+        if st.button('Decisión del Préstamo'):
+            cuota = st.session_state.get('cuota', None)
+            if cuota > 0.3 * renta_mensual or empleado == 'No' or tipo_empleo == 'Temporal' or analisis == 'Potencial mal pagador':
+                st.markdown("""
+                <div class="container">
+                    <p class='left-text-pg1'>Préstamo Denegado</p>
+                </div> """, unsafe_allow_html=True)
+                
+            else:
+                st.markdown("""
+                <div class="container">
+                    <p class='left-text-pg1'>Préstamo Aprobado</p>
+                </div> """, unsafe_allow_html=True)
 
 
 # Verificar si la opción "Predicción Acciones" fue seleccionada
@@ -985,6 +1074,17 @@ css = """
         color: #2f0549;
         text-align: left;
         font-size: 1.5em;
+        line-height: 1.5;
+        margin-bottom: 15px;
+        font-family: 'DmSans', sans-serif;
+        width: 90%; 
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .left-text-pg7 {
+        color: #2f0549;
+        text-align: left;
+        font-size: 1.0em;
         line-height: 1.5;
         margin-bottom: 15px;
         font-family: 'DmSans', sans-serif;
