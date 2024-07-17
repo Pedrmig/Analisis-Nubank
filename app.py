@@ -51,7 +51,7 @@ if selected == "Home":
         <div class="container">
         <h1 class='centered-title-pg1'>Nubank Data Science Challenge</h1>
         <p class='centered-text-pg1'>Nubank es un neobanco brasileño con sede en la ciudad de São Paulo, Brasil, donde es conocido como Nu.</p>
-        <p class='centered-text-pg1'>En este proyecto, conoceremos un poco sobre el modelo de negocio, sus resultados, y presentaremos un modelo automatizado de análisis de crédito.</p>
+        <p class='centered-text-pg1'>En este proyecto, conoceremos un poco sobre el modelo de negocio, sus resultados, y presentaremos dos modelos automatizados, uno del análisis del crédito, y otro, del valor de las acciones.</p>
     </div>
         """, unsafe_allow_html=True)
 
@@ -82,8 +82,8 @@ if selected == "Empresa":
     with col1:
         st.markdown("""
         <div class="container">
-            <p class='centered-text-pg1'>En seis años, Nubank se convirtió en el sexto banco más grande de Brasil, ubicándose entre los primeros cinco emisores de tarjetas de crédito y alcanzando la arca de 20 millones de clientes a principios de 2020. Entre mediados de 2018 y fines de 2019 (según un estudio de apptopia) su app fue descargada más veces que los tres neobancos más importantes de Europa tomados en conjunto.</p>
-            <p class='centered-text-pg1'>Nubank es un neobanco brasileño con sede en la ciudad de São Paulo, Brasil, donde es conocido como Nu. Fundado en 2013, está considerado como el banco digital más grande del mundo fuera de Asia y es una de las empresas tecnofinanciera más grandes en América Latina. En 2019 fue reconocida como una de las empresas más innovadoras del mundo por la revista estadounidense Fast Company.</p>
+            <p class='centered-text-pg1'>En seis años, Nubank se convirtió en el sexto banco más grande de Brasil, ubicándose entre los primeros cinco emisores de tarjetas de crédito y alcanzando el arca de 20 millones de clientes a principios de 2020. Entre mediados de 2018 y fines de 2019 (según un estudio de apptopia) su app fue descargada más veces que los tres neobancos más importantes de Europa tomados en conjunto.</p>
+            <p class='centered-text-pg1'>Nubank es un neobanco brasileño con sede en la ciudad de São Paulo, Brasil, donde es conocido como Nu. Fundado en 2013, está considerado como el banco digital más grande del mundo fuera de Asia y es una de las empresas tecnofinancieras más grandes en América Latina. En 2019 fue reconocida como una de las empresas más innovadoras del mundo por la revista estadounidense Fast Company.</p>
 
         </div>
         """, unsafe_allow_html=True)
@@ -124,7 +124,7 @@ if selected == "Empresa":
 
         st.markdown("""
         <div class="container">
-            <p class='sub-figure2'>Nubank está diversificando sus productos, con cada uno muestra un nivel de crecimiento aqunque a diferentes ritmos. Productos como los préstamos personales, contratos de seguros y cuentas de empresas tienen mucho potencial de crecimiento, pero actualmente representan una menor proporción de la base de clientes.</p>
+            <p class='sub-figure2'>Nubank está diversificando sus productos, con cada uno muestra un nivel de crecimiento aunque a diferentes ritmos. Productos como los préstamos personales, contratos de seguros y cuentas de empresas tienen mucho potencial de crecimiento, pero actualmente representan una menor proporción de la base de clientes.</p>
             <p class='sub-figure2'>NuConta y las tarjetas de crédito son los productos más populares y muestran el mayor crecimiento en número de clientes.</p>
             <p class='sub-figure2'>Nubank ha tenido un éxito notable en expandir su base de clientes en Brasil, especialmente en sus productos más populares y explorando y creciendo en otros segmentos del mercado financiero.</p>
         </div>    
@@ -152,7 +152,7 @@ if selected == "Empresa":
         <div class="container">
             <p class='sub-figure2'>El gráfico proporcina una visión clara de la evolución de los porcentajes de atrasos en los pagos de los clientes durante un periodo de 4 años (desde Julio de 2020 hasta Enero de 2024) Los atrasos se dividen en dos categorías, atrasos de 15 a 90 días y de más de 90 días.</p>
             <p class='sub-figure2'>Se muestra una tendencia de crecimiento en los porcentajes de atrasos tanto a corto como a largo plazo, lo que puede representar un desafío significativo para Nubank en términos de gestión de riesgos y sostenibilidad financiera.</p>
-            <p class='sub-figure2'>Nubank podría considerar implementar programas de apoyo, programas de educación financiera y apoyo en la gestión de deudas de sus clientes para evitar retrasos prolongados ya que los inversores pueden ven el aumento de los atrasos como un riesgo potencial que pueda afectar la rentabilidad de la empresa, por lo que es crucial que Nubank mantenga una gestión proactiva para mitigar este riesgo.</p>
+            <p class='sub-figure2'>Nubank podría considerar implementar programas de apoyo, programas de educación financiera y apoyo en la gestión de deudas de sus clientes para evitar retrasos prolongados ya que los inversores pueden ver el aumento de los atrasos como un riesgo potencial que pueda afectar la rentabilidad de la empresa, por lo que es crucial que Nubank mantenga una gestión proactiva para mitigar este riesgo.</p>
         </div>    
         """, unsafe_allow_html=True)
         
@@ -361,7 +361,6 @@ if selected == "Dataset":
 
 
         
-    #if tabs == "Visualizaciones":
         
     if tabs == "Prediccion":
     
@@ -407,7 +406,7 @@ if selected == "Dataset":
             <p class='sub-figure2'>Comparando ambos modelos se observa que el primer modelo tiene una alta precisión y recall para la clase 0, pero su desempeño en la calse 1 es muy pobre (bajo recall y F1-Score), el segundo modelo tiene un balance mucho mejor entre las clases con valores de precisión, recall y F1-score más equilibrados.</p>
             <p class='sub-figure2'>Ambos modelos tienen una exactitud similar, 0.86 para el primero modelo y 0.85 para el segundo.</p>
             <p class='sub-figure2'>El segundo modelo tiene un AUC significativamente mejor (0.8484) en comparación con el primero (0.5581), lo que indica que el segundo modelo es mejor en términos de su capacidad de discriminar entre las clases.</p>
-            <p class='sub-figure2'>En conclusión, aunque ambos modelos tiene una exactitud similar, el segundo modelo es claramente superior en términos de balance y capacidad discriminativa, como lo demuestra su AUC mucho más alto.</p>
+            <p class='sub-figure2'>En conclusión, aunque ambos modelos tienen una exactitud similar, el segundo modelo es claramente superior en términos de balance y capacidad discriminativa, como lo demuestra su AUC mucho más alto.</p>
         </div>    
         """, unsafe_allow_html=True)    
         
@@ -424,7 +423,7 @@ if selected == "Dataset":
         <div class="container">
             <p class='sub-figure2'>El primer modelo tiene un excelente desempeño en la clase 0 con muy pocos falsos positivos y muchos verdaderos negativos, sin embargo, tiene un desempeño muy pobre en la clase 1 con muchos falsos negativos y pocos verdaderos positivos.</p>
             <p class='sub-figure2'>El segundo modelo es más equilibrado; Aunque tiene más falsos positivos en la clase 0, tiene un desempeño mucho mejor en la clase 1, con muchos más verdaderos positivos y menos falsos negativos.</p>
-            <p class='sub-figure2'>Estas observaciones coinciden con los resultados de las métricas previsas, donde el segundo modelo mostraba un mejor balance entre precisión y recall para ambas clases, así como un AUC significativamente mejor. El segundo modelo ofrece un rendimiento global mucho mejor, especialmente en la detección de la clase 1.</p>
+            <p class='sub-figure2'>Estas observaciones coinciden con los resultados de las métricas previas, donde el segundo modelo mostraba un mejor balance entre precisión y recall para ambas clases, así como un AUC significativamente mejor. El segundo modelo ofrece un rendimiento global mucho mejor, especialmente en la detección de la clase 1.</p>
         </div>    
         """, unsafe_allow_html=True) 
             
@@ -445,7 +444,7 @@ if selected == "Dataset":
         </div>    
         """, unsafe_allow_html=True)
         st.image("images_dataset/prestamosporestado.png", use_column_width=True)
-        st.markdown("<p class='sub-figure'>En este gráfico podemos observar una distribución desigual en la cantidad de préstamos por estado (el estado 47 tiene la mayor cantidad de préstamos, superando los 7.000, pero tenemmos otros estados con grandes cantidades de préstamos como 16, 14, 6 y 46, en el lado opuesto encontramos los estados: 20, 22, 11, 12 5 y 32 con valores cercanos a 0). Existe una clara tendencia decreciente en la cantidad de préstamos conforme se avanza del estado 47 al 21, esto indica que unos pocos estados tienen una cantidad significativamente más alta de préstamos, mientras otros tienen cantidades mucho menores. Esta información podría ser útil para entender la demanda de préstamos en diferentes regiones y para identificar áreas dónde se podrían enfocar más recursos o políticas para equilibrar la distribución de préstamos. Los estados estan por numeros pues estan encriptados en el dataset.</p>", unsafe_allow_html=True)
+        st.markdown("<p class='sub-figure'>En este gráfico podemos observar una distribución desigual en la cantidad de préstamos por estado (el estado 47 tiene la mayor cantidad de préstamos, superando los 7.000, pero tenemmos otros estados con grandes cantidades de préstamos como 16, 14, 6 y 46, en el lado opuesto encontramos los estados: 20, 22, 11, 12 5 y 32 con valores cercanos a 0). Existe una clara tendencia decreciente en la cantidad de préstamos conforme se avanza del estado 47 al 21, esto indica que unos pocos estados tienen una cantidad significativamente más alta de préstamos, mientras otros tienen cantidades mucho menores. Esta información podría ser útil para entender la demanda de préstamos en diferentes regiones y para identificar áreas dónde se podrían enfocar más recursos o políticas para equilibrar la distribución de préstamos. Los estados están por números pues están encriptados en el dataset.</p>", unsafe_allow_html=True)
                 
         st.image("images_dataset/canaldemarketing.png", use_column_width=True)
         st.markdown("<p class='sub-figure'>Esta gráfica de barras indica que el Website es el canal de marketing más efectivo en términos de ingresos, por lo que las estrategias de marketing deberían centrarse fuertemente en este canal (superando los 10.000 ingresos) y seguido por el Waiting list con unos ingresos alrededor de 7.000. Los demás canales tienen un rendimiento similar pero significativamente menor. Se recomienda enfocarse en fortalecer la presencia y estrategia en el Website mientras se buscan maneras de mejorar el rendimiento de los otros canales de marketing.</p>", unsafe_allow_html=True)
@@ -603,8 +602,8 @@ if selected == "Análisis de Crédito":
 
         st.markdown("""
         <div class="container">
-            <p class='centered-text-pg5'> Aquí se puede ver el funcionamiento de la Análisis de Crédito vista de Empresa</p>
-            <p class='centered-text-pg5'> Algunas informaciones estan encriptadas por el banco o son de órganos y bases externas, asi que las vamos a rellenar automaticamente.</p>
+            <p class='centered-text-pg5'> Aquí se puede ver el funcionamiento del Análisis de Crédito a vista de empresa</p>
+            <p class='centered-text-pg5'> Algunas informaciones están encriptadas por el banco o son de órganos y bases externas, asi que las vamos a rellenar automaticamente.</p>
         </div>    
         """, unsafe_allow_html=True) 
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
@@ -612,7 +611,7 @@ if selected == "Análisis de Crédito":
 
         st.markdown("""
         <div class="container">
-            <p class='left-text-pg6'>Simulación de Análisis.</p>
+            <p class='left-text-pg6'>Simulación del Análisis.</p>
         </div>    
         """, unsafe_allow_html=True)
             
@@ -659,7 +658,7 @@ if selected == "Análisis de Crédito":
         
         # fazer um selectbox
         with col1:
-            selected_state = st.selectbox("Ciudad de Morada", state_list)
+            selected_state = st.selectbox("Ciudad", state_list)
             state = {value: key for key, value in state_map_1.items()}[selected_state]
             
             selected_marketing_channel = st.selectbox("Canal de Marketing", marketing_channel_list)
@@ -673,9 +672,9 @@ if selected == "Análisis de Crédito":
             last_borrowed_in_months = st.number_input("Número de meses del ultimo prestamo", min_value=0)
             credit_limit = st.number_input("Límite de Credito", min_value=0)
         with col3:
-            income = st.number_input("Recibimientos anuales", min_value=0)
-            n_bankruptcies = st.number_input("Vezes que has falido", min_value=0)
-            n_accounts = st.number_input("Cuentas que posee", min_value=0)
+            income = st.number_input("Ingresos anuales", min_value=0)
+            n_bankruptcies = st.number_input("Veces que has caído en bancarrota", min_value=0)
+            n_accounts = st.number_input("Cuentas que posees", min_value=0)
         
         
         # preenchimento automatico
@@ -826,7 +825,7 @@ if selected == "Análisis de Crédito":
             empleado = st.selectbox('¿Está empleado?', ('Sí', 'No'))
         with col2:
             if empleado == 'Sí':
-                tipo_empleo = st.selectbox('¿Su empleo es?', ('Indefinido', 'Temporal'))
+                tipo_empleo = st.selectbox('Tipo de contrato', ('Indefinido', 'Temporal'))
             else:
                 tipo_empleo = 'Desempleado'
         with col3:    
@@ -945,7 +944,7 @@ if selected == "Predicción Acciones":
     st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
     st.markdown("""
     <div class="container">
-        <p class='centered-text-pg5'>Basándonos en esa información, hacemos una predicción de cuánto estarán las acciones de Nubank en los próximos 3 días.</p>
+        <p class='centered-text-pg5'>Basándonos en esa información, hacemos una predicción de a cuánto estarán las acciones de Nubank en los próximos 3 días.</p>
         <p class='centered-text-pg5'>Los valores se actualizan diariamente, y siempre se consideran los 3 próximos días laborables.</p>
     </div>  
     """, unsafe_allow_html=True)
