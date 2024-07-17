@@ -20,6 +20,57 @@ import plotly.io as pio
 
 model = joblib.load('modelo_GBC.pkl')
 
+ticker = 'NU'
+end_date = date.today()
+start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
+
+nu_data = yf.download(ticker, start=start_date, end=end_date, progress=False)
+nu_data = nu_data.reset_index()
+nu_data = nu_data[['Date', 'Close']]
+nu_data = nu_data.dropna()
+
+scaler = MinMaxScaler(feature_range=(0, 1))
+nu_data['Close'] = scaler.fit_transform(nu_data[['Close']])
+
+train_size = int(len(nu_data) * 0.8)
+train_data, test_data = nu_data[:train_size], nu_data[train_size:]
+
+def create_dataset(data, time_step=1):
+    X, y = [], []
+    for i in range(len(data) - time_step - 1):
+        a = data[i:(i + time_step), 0]
+        X.append(a)
+        y.append(data[i + time_step, 0])
+    return np.array(X), np.array(y)
+    
+time_step = 60
+train_data_np = train_data['Close'].values.reshape(-1, 1)
+test_data_np = test_data['Close'].values.reshape(-1, 1)
+
+X_train, y_train = create_dataset(train_data_np, time_step)
+X_test, y_test = create_dataset(test_data_np, time_step)
+
+X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
+X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
+
+model = Sequential()
+model.add(Input(shape=(time_step, 1)))
+model.add(LSTM(50, return_sequences=True))
+model.add(LSTM(50, return_sequences=False))
+model.add(Dense(25))
+model.add(Dense(1))
+
+model.compile(optimizer='adam', loss='mean_squared_error')
+model.fit(X_train, y_train, batch_size=1, epochs=1)
+
+train_predict = model.predict(X_train)
+test_predict = model.predict(X_test)
+
+train_predict = scaler.inverse_transform(train_predict)
+test_predict = scaler.inverse_transform(test_predict)
+y_train = scaler.inverse_transform([y_train])
+y_test = scaler.inverse_transform([y_test]) 
+
 # ---------------------SITE CONFIG----------------------#
 st.set_page_config(
     page_title=" Nubank Data Science Challenge",
@@ -772,58 +823,6 @@ if selected == "Predicción Acciones":
     </div>
     """, unsafe_allow_html=True) 
     st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
-
-    
-    ticker = 'NU'
-    end_date = date.today()
-    start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
-
-    nu_data = yf.download(ticker, start=start_date, end=end_date, progress=False)
-    nu_data = nu_data.reset_index()
-    nu_data = nu_data[['Date', 'Close']]
-    nu_data = nu_data.dropna()
-
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    nu_data['Close'] = scaler.fit_transform(nu_data[['Close']])
-
-    train_size = int(len(nu_data) * 0.8)
-    train_data, test_data = nu_data[:train_size], nu_data[train_size:]
-
-    def create_dataset(data, time_step=1):
-        X, y = [], []
-        for i in range(len(data) - time_step - 1):
-            a = data[i:(i + time_step), 0]
-            X.append(a)
-            y.append(data[i + time_step, 0])
-        return np.array(X), np.array(y)
-    
-    time_step = 60
-    train_data_np = train_data['Close'].values.reshape(-1, 1)
-    test_data_np = test_data['Close'].values.reshape(-1, 1)
-
-    X_train, y_train = create_dataset(train_data_np, time_step)
-    X_test, y_test = create_dataset(test_data_np, time_step)
-
-    X_train = X_train.reshape(X_train.shape[0], X_train.shape[1], 1)
-    X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
-
-    model = Sequential()
-    model.add(Input(shape=(time_step, 1)))
-    model.add(LSTM(50, return_sequences=True))
-    model.add(LSTM(50, return_sequences=False))
-    model.add(Dense(25))
-    model.add(Dense(1))
-
-    model.compile(optimizer='adam', loss='mean_squared_error')
-    model.fit(X_train, y_train, batch_size=1, epochs=1)
-
-    train_predict = model.predict(X_train)
-    test_predict = model.predict(X_test)
-
-    train_predict = scaler.inverse_transform(train_predict)
-    test_predict = scaler.inverse_transform(test_predict)
-    y_train = scaler.inverse_transform([y_train])
-    y_test = scaler.inverse_transform([y_test]) 
 
     # Gráfico interactivo con Plotly
     fig = go.Figure()
