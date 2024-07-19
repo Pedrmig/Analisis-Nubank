@@ -4,9 +4,11 @@ import numpy as np
 from streamlit_option_menu import option_menu
 from plotly.offline import  init_notebook_mode
 import cufflinks as cf
-
+import requests
 import streamlit.components.v1 as components
 import random
+import os
+import ssl
 import yfinance as yf
 import plotly.graph_objs as go
 import joblib
@@ -17,6 +19,8 @@ from tensorflow.keras.layers import Dense, LSTM, Input
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 import plotly.io as pio
+import urllib.request
+import json
 
 model = joblib.load('modelo_GBC.pkl')
 
@@ -701,6 +705,7 @@ if selected == "Análisis de Crédito":
                         51, 71, 54, 55,  5, 56, 60, 69, 59, 61, 64, 62, 78, 77, 76, 65,  2,
                         63, 72, 74, 66, 67, 68, 73,  0, 70, 80, 75,  1, 79])
         real_state = random.choice([1, 3, 4, 2, 0])
+        state = random.choice([1, 3, 4, 2, 0])
         n_defaulted_loans = random.choice([1, 2, 0, 3, 4, 5])
         external_data_provider_credit_checks_last_year = random.choice([1, 0, 2] )
 
@@ -761,24 +766,91 @@ if selected == "Análisis de Crédito":
                         external_data_provider_fraud_score, marketing_channel,
                         reported_income, target_fraud]
         
-        input_data_azure = [score_1, score_2, score_3, score_4, score_5, score_6,
+        def allowSelfSignedHttps(allowed):
+            # bypass the server certificate verification on client side
+            if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
+                ssl._create_default_https_context = ssl._create_unverified_context
+
+        allowSelfSignedHttps(True)
+
+        data =  {
+            "input_data": {
+                "columns": [
+                "score_1",
+                "score_2",
+                "score_3",
+                "score_4",
+                "score_5",
+                "score_6",
+                "risk_rate",
+                "last_amount_borrowed",
+                "last_borrowed_in_months",
+                "credit_limit",
+                "income",
+                "state",
+                "job_name",
+                "real_state",
+                "n_bankruptcies",
+                "n_defaulted_loans",
+                "n_accounts",
+                "n_issues",
+                "external_data_provider_credit_checks_last_2_year",
+                "external_data_provider_credit_checks_last_month",
+                "external_data_provider_credit_checks_last_year",
+                "external_data_provider_fraud_score",
+                "marketing_channel",
+                "reported_income",
+                "target_fraud"
+            ],
+            "index": [0],
+            "data": [score_1, score_2, score_3, score_4, score_5, score_6,
                         risk_rate, last_amount_borrowed, last_borrowed_in_months,
-                        credit_limit, income, job_name,
+                        credit_limit, income,state, job_name,real_state,
                         n_bankruptcies, n_defaulted_loans, n_accounts, n_issues,
                         external_data_provider_credit_checks_last_2_year,
                         external_data_provider_credit_checks_last_month,
                         external_data_provider_credit_checks_last_year,
                         external_data_provider_fraud_score, marketing_channel,
                         reported_income, target_fraud]
+            }
+        }
 
+        body = str.encode(json.dumps(data))
+
+        url = 'https://numachinelearning-eajxb.eastus.inference.ml.azure.com/score'
+        import keys
+        api_key = keys.api_key
+        if not api_key:
+            raise Exception("A key should be provided to invoke the endpoint")
+
+        headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key), 'azureml-model-deployment': 'azure-model-nu-1' }
+
+        req = urllib.request.Request(url, body, headers)
+  
         # Analisis de Credito
         st.markdown("<p class='sub-figure'></p>", unsafe_allow_html=True)
         if st.button("Análisis de Credito"):
             predicted = predict_price(model, input_data)
             st.markdown(f"""
                 <div class="container">
-                    <p class='left-text-pg1'>El previsto en el análisis es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}</p>
+                    <p class='left-text-pg1'>El previsto en el análisis del Modelo PKL es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}</p>
                 </div> """, unsafe_allow_html=True)
+            try:
+                req = urllib.request.Request(url , body, headers)
+                with urllib.request.urlopen(req) as response:
+                    result = json.loads(response.read())
+                    st.markdown(f"""
+                        <div class="container">
+                            <p class='left-text-pg1'>El previsto en el análisis de AZURE es que: {'Potencial Buen Pagador' if result == 0 else 'Potencial Mal Pagador'}</p>
+                        </div> """, unsafe_allow_html=True)
+            except urllib.error.HTTPError as error:
+                print("The request failed with status code: " + str(error.code))
+
+            # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+                print(error.info())
+                print(error.read().decode("utf8", 'ignore'))
+
+
 
     if tabs == "Vista Cliente":
         st.markdown("""
@@ -836,6 +908,8 @@ if selected == "Análisis de Crédito":
             # Decisión del préstamo
         if st.button('Decisión del Préstamo'):
             cuota = st.session_state.get('cuota', None)
+            if cuota is None:
+                st.error('Primero calcule el valor de la cuota')
             if cuota > 0.3 * renta_mensual or empleado == 'No' or tipo_empleo == 'Temporal' or analisis == 'Potencial mal pagador':
                 st.markdown("""
                 <div class="container">
