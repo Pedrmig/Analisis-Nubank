@@ -3,7 +3,7 @@
 ## Project Overview
 
 This project involves a brief analysis of Nubank, data exploration, and the creation of machine learning models. One model is based on a fictitious or encrypted dataset, and another model is based on the bank's stock value since its IPO. 
-The models and analyses are contained within Jupyter Notebooks and are also presented in a Streamlit app for enhanced visualization.
+The models and analyses are contained within Jupyter Notebooks and are also presented in a Streamlit app for better visualization.
 
 Feel free to explore more on [Streamlit](https://nubank.streamlit.app/).
 
