@@ -818,9 +818,9 @@ if selected == "Análisis de Crédito":
         body = str.encode(json.dumps(data))
 
         url = 'https://numachinelearning-eajxb.eastus.inference.ml.azure.com/score'
-        #import keys
-        #api_key = keys.api_key
-        api_key = st.secrets["api_key"]
+        
+        api_key = 'D9PCaXA8zBWRaCa06BNnH3pl5T5wNTqF'
+        
         if not api_key:
             raise Exception("A key should be provided to invoke the endpoint")
 
