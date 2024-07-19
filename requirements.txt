@@ -7,3 +7,4 @@ scikit-learn==1.4.2
 tensorflow==2.17.0
 matplotlib==3.9.1
 yfinance==0.2.40
+python-dotenv==1.0.1

@@ -21,6 +21,7 @@ from sklearn.preprocessing import MinMaxScaler
 import plotly.io as pio
 import urllib.request
 import json
+from dotenv import load_dotenv
 
 model = joblib.load('modelo_GBC.pkl')
 
@@ -818,8 +819,8 @@ if selected == "Análisis de Crédito":
         body = str.encode(json.dumps(data))
 
         url = 'https://numachinelearning-eajxb.eastus.inference.ml.azure.com/score'
-        
-        api_key = 'D9PCaXA8zBWRaCa06BNnH3pl5T5wNTqF'
+        load_dotenv()
+        api_key = os.getenv('api_key')
         
         if not api_key:
             raise Exception("A key should be provided to invoke the endpoint")
