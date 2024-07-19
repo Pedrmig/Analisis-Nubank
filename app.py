@@ -835,7 +835,7 @@ if selected == "Análisis de Crédito":
             predicted = predict_price(model, input_data)
             st.markdown(f"""
                 <div class="container">
-                    <p class='left-text-pg1'>El previsto en el análisis del Modelo PKL es que: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}</p>
+                    <p class='left-text-pg1'>El previsto en el análisis que es: {'Potencial Buen Pagador' if predicted == 0 else 'Potencial Mal Pagador'}</p>
                 </div> """, unsafe_allow_html=True)
             try:
                 req = urllib.request.Request(url , body, headers)
