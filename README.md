@@ -2,10 +2,10 @@
 
 ## Project Overview
 
-This project involves the creation of a machine learning model based on a sample dataset from Nubank's data analysis. 
-A predictive model has been developed and, using Streamlit, an organized analysis of some results from Nubank and the database analysis are presented.
+This project involves a brief analysis of Nubank, data exploration, and the creation of machine learning models. One model is based on a fictitious or encrypted dataset, and another model is based on the bank's stock value since its IPO. 
+The models and analyses are contained within Jupyter Notebooks and are also presented in a Streamlit app for enhanced visualization.
 
-Feel free to explore more at [Streamlit](https://nubank.streamlit.app/).
+Feel free to explore more on [Streamlit](https://nubank.streamlit.app/).
 
 ## About Nubank
 
@@ -18,7 +18,11 @@ In just six years, Nubank became the sixth-largest bank in Brazil, ranking among
 - **data**: Contains the dataset used for analysis.
   - Financial information is available on the bank's website for its investors.
   - The information contained in the dataset is fictitious and/or encrypted.
-- **model**: Includes the machine learning model and scripts for training and evaluation.
+- **models**:
+  - Python Machine Learning Model: Exported in PKL format for loading and use on the page.
+  - Azure Machine Learning Model: Loaded via API. May not function in all interactions due to paid traffic and potential deactivation.
+  - Time Series Model: Utilizes historical daily closing prices of the bank's stock to forecast the next three business days.
 - **streamlit_app**: Houses the Streamlit application for interactive analysis.
 - **notebooks**: Jupyter notebooks for exploratory data analysis and model development.
+
 
