@@ -8,6 +8,7 @@ The models and analyses are contained within Jupyter Notebooks and are also pres
 Feel free to explore more on [Streamlit](https://nubank.streamlit.app/).
 
 ## About Nubank
+![Nubank](Images/nubanksede.jpeg)
 
 Nubank is a Brazilian neobank headquartered in São Paulo, Brazil. Founded in 2013, it is considered the largest digital bank in the world outside of Asia and one of the largest fintech companies in Latin America. In 2019, it was recognized as one of the most innovative companies in the world by the American magazine Fast Company.
 
