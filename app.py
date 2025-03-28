@@ -940,7 +940,7 @@ if selected == "Predicción Acciones":
     
     ticker = 'NU'
     end_date = date.today()
-    start_date = datetime.datetime.strptime('2021-12-09', '%Y-%m-%d').date()
+    start_date = datetime.date.strptime('2021-12-09', '%Y-%m-%d').date()
     
     nu_data = yf.download(ticker, start=start_date, end=end_date, progress=False)
     nu_data = nu_data.reset_index()
