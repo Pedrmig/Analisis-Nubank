@@ -12,7 +12,6 @@ import ssl
 import yfinance as yf
 import plotly.graph_objs as go
 import joblib
-import datetime
 from datetime import datetime, date, timedelta
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
