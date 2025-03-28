@@ -12,6 +12,7 @@ import ssl
 import yfinance as yf
 import plotly.graph_objs as go
 import joblib
+import datetime
 from datetime import datetime, date, timedelta
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
@@ -940,8 +941,8 @@ if selected == "Predicción Acciones":
     
     ticker = 'NU'
     end_date = date.today()
-    start_date = datetime.strptime('2021-12-09', '%Y-%m-%d').date()
-
+    start_date = datetime.datetime.strptime('2021-12-09', '%Y-%m-%d').date()
+    
     nu_data = yf.download(ticker, start=start_date, end=end_date, progress=False)
     nu_data = nu_data.reset_index()
     nu_data = nu_data[['Date', 'Close']]
